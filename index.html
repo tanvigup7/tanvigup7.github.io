@@ -1,1 +1,273 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>React App</title><script defer="defer" src="/static/js/main.4f49ed6b.js"></script><link href="/static/css/main.ce64a9c1.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanvi Gupta</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>
+      tanvi
+      <span>gupta</span>
+    </h1>
+    <p>code x art x sound</p>
+  </section>
+
+
+  <!-- ART CAROUSEL -->
+<section class="gallery-section">
+  <h2>art work</h2>
+
+  <div class="gallery" id="gallery">
+
+    <figure class="slide">
+      <img loading="lazy" src="https://picsum.photos/900/1200?1" />
+      <figcaption> </figcaption>
+    </figure>
+
+    <figure class="slide">
+      <img loading="lazy" src="https://picsum.photos/900/1200?2" />
+      <figcaption> </figcaption>
+    </figure>
+
+    <figure class="slide">
+      <img loading="lazy" src="https://picsum.photos/900/1200?3" />
+      <figcaption>g </figcaption>
+    </figure>
+
+    <figure class="slide">
+      <img loading="lazy" src="https://picsum.photos/900/1200?4" />
+      <figcaption> </figcaption>
+    </figure>
+
+  </div>
+</section>
+
+
+
+
+  <!-- MUSIC / PHONE MOCKUP -->
+  <section class="music-section">
+  <h2>my mixes!</h2>
+
+  <div class="phone" id="phone-player">
+    <div class="screen">
+
+      <div class="track active" data-track="late-night-compile.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Ambient / Electronic</p>
+        </div>
+      </div>
+
+      <div class="track" data-track="study-exe.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Lofi / Jazzhop</p>
+        </div>
+      </div>
+
+      <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+            <div class="track" data-track="gym-flow.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>track</h3>
+          <p>Rap / Hyperpop</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mini Audio Player -->
+  <audio id="audio-player" preload="metadata"></audio>
+</section>
+
+<script>
+const audio = document.getElementById("audio-player");
+const tracks = document.querySelectorAll(".track");
+
+tracks.forEach(track => {
+  track.addEventListener("click", () => {
+    // Remove active from other tracks
+    tracks.forEach(t => t.classList.remove("active"));
+    track.classList.add("active");
+
+    // Load audio
+    const src = track.getAttribute("data-track");
+    audio.src = src;
+    audio.play();
+  });
+});
+</script>
+  <!-- PROJECTS -->
+  <section class="projects">
+    <h2>selected projects</h2>
+
+    <div class="project-grid">
+      <div class="card">AI Surgical Path Planner</div>
+      <div class="card">Sports Vision Analytics</div>
+      <div class="card">Music ML Generator</div>
+    </div>
+  </section>
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <span id="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" />
+  <figcaption id="lightbox-caption"></figcaption>
+</div>
+
+
+  <footer>
+    © 2026 Tanvi
+  </footer>
+<script>
+const gallery = document.getElementById("gallery");
+const slides = document.querySelectorAll(".slide");
+
+function updateActive() {
+  const center = gallery.scrollLeft + gallery.offsetWidth / 2;
+
+  slides.forEach(slide => {
+    const slideCenter =
+      slide.offsetLeft + slide.offsetWidth / 2;
+
+    const dist = Math.abs(center - slideCenter);
+
+    if (dist < slide.offsetWidth / 2) {
+      slide.classList.add("active");
+    } else {
+      slide.classList.remove("active");
+    }
+  });
+}
+
+gallery.addEventListener("scroll", updateActive);
+updateActive();
+</script>
+<script>
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxCaption = document.getElementById("lightbox-caption");
+const lightboxClose = document.getElementById("lightbox-close");
+
+slides.forEach(slide => {
+  slide.addEventListener("click", () => {
+    const img = slide.querySelector("img");
+    const caption = slide.querySelector("figcaption").innerText;
+
+    lightboxImg.src = img.src;
+    lightboxCaption.innerText = caption;
+
+    lightbox.style.display = "flex";
+  });
+});
+
+lightboxClose.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
+
+// close lightbox when clicking outside the image
+lightbox.addEventListener("click", e => {
+  if (e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
+});
+</script>
+
+
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</body>
+</html>
