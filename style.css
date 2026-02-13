@@ -6,20 +6,44 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  color: #e8e8ea;
+  font-family: "Helvetica Neue", system-ui, sans-serif;
+  background: #ffffff;
+  color: #111;
+  background-image: url("images/paper-texture.jpg");
+  background-size: cover;
 
-  background:
-    radial-gradient(900px 600px at 10% 20%, rgba(90,120,255,0.12), transparent 60%),
-    radial-gradient(800px 600px at 90% 80%, rgba(255,120,180,0.10), transparent 60%),
-    #0a0c10;
 }
 
 /* spacing */
 section {
   padding: 120px 8vw;
 }
+.header-header {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* This makes it exactly 100% of the screen height */
+  overflow: hidden;
+  background-color: #fff; /* Matches your scan's background */
+}
 
+.header-image {
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  object-fit: contain; /* Use 'contain' to see the whole drawing, or 'cover' to fill every inch */
+  filter: contrast(1.1); /* Makes the ink look deeper black */
+}
+
+.header-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #000;
+  font-family: sans-serif;
+  letter-spacing: 5px;
+}
 /* ===== HERO ===== */
 
 .hero {
@@ -286,6 +310,7 @@ figcaption {
 }
 
 /* ===== DJ Section ===== */
+/* ===== DJ Section ===== */
 .record-container {
 position: relative;
   width: 400px;          /* width of entire turntable */
@@ -410,8 +435,6 @@ width: 160px;        /* longer for realism */
   z-index: 10;
   transition: transform 0.6s ease, top 0.6s ease, left 0.6s ease;
 }
-
-
 
 
 /* ===== FOOTER ===== */
