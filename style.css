@@ -143,9 +143,9 @@ figcaption {
 
 .phone {
   margin: 60px auto;
-  width: 280px;
+  width: 320px;
   height: 560px;
-  border-radius: 40px;
+  border-radius: 10px;
   padding: 18px;
   background: #111318;
   box-shadow: 0 40px 120px rgba(0,0,0,0.7);
@@ -164,7 +164,7 @@ figcaption {
   gap: 14px;
   align-items: center;
   padding: 14px 0;
-  border-radius: 18px;
+  border-radius: 28px;
   cursor: pointer;
   transition: transform 0.3s ease, background 0.3s ease;
 }
@@ -172,12 +172,12 @@ figcaption {
 .track:hover {
   transform: translateX(6px);
 }
-/*
+
 .track.active {
   background: rgba(90,120,255,0.15);
   box-shadow: 0 10px 28px rgba(90,120,255,0.3);
 }
-*/
+
 .cover {
   width: 52px;
   height: 52px;
@@ -291,6 +291,6 @@ figcaption {
 
 footer {
   text-align: center;
-  padding: 80px;
+  padding: 0px;
   color: #666;
 }
