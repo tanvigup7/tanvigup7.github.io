@@ -285,6 +285,133 @@ figcaption {
   to { transform: scale(1); }
 }
 
+/* ===== DJ Section ===== */
+.record-container {
+position: relative;
+  width: 400px;          /* width of entire turntable */
+  margin: 80px auto;
+  text-align: center;
+}
+/* Base rectangle under the record */
+.turntable-base {
+  position: absolute;
+  top: 20px;             /* adjust so it sits under record */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
+  height: 300px;           /* height of the box */
+  background: linear-gradient(145deg, #6f6e6e, #979595);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(58, 57, 57, 0.5);
+  z-index: 0;
+}
+
+.record {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  background:
+    radial-gradient(circle at center, #111 60%, #222 100%),
+    repeating-radial-gradient(circle, rgba(255,255,255,0.03) 0 2px, transparent 2px 4px);
+  position: relative;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.75),
+              0 8px 20px rgba(0,0,0,0.75);  /* subtle depth */
+}
+.record::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at center, #ff3333 0%, #cc0000 100%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+  z-index: 2;
+}
+.record.spinning {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tonearm {
+width: 160px;        /* longer for realism */
+  height: 6px;
+  background: #aaa;
+  position: absolute;
+  top: 40%;            /* offset from center, not smack dab in middle */
+  left: 92%;
+  transform-origin: left center;
+  transform: rotate(-60deg) translateX(-50%);  /* subtle angle */
+  border-radius: 2px;
+  z-index: 5;  
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.track-list {
+   display: flex;
+  flex-wrap: wrap;        /* allows multiple rows */
+  justify-content: center; /* center the squares */
+  gap: 20px;              /* spacing between squares */
+  margin-top: 30px;
+}
+
+.track-square {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #444, #222);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.track-square .info {
+  text-align: center;
+  margin-top: 4px;  /* space between cover and text */
+}
+
+.track-square .info h3 {
+  font-size: 0.7rem;   /* smaller title */
+  line-height: 1rem;
+  margin: 2px 0;
+   /* optional: prevent long titles from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;  /* show ... if too long */
+}
+
+.track-square .info p {
+  font-size: 0.6rem;   /* smaller artist name */
+  line-height: 0.8rem;
+  margin: 0;
+  color: #ccc;        /* optional: make it lighter */
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-square:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(90,120,255,0.4);
+}
+
+.track-square.flying {
+  position: absolute;
+  z-index: 10;
+  transition: transform 0.6s ease, top 0.6s ease, left 0.6s ease;
+}
+
+
 
 
 /* ===== FOOTER ===== */

@@ -167,6 +167,145 @@ tracks.forEach(track => {
 });
 </script>
 
+ <!-- DJ Section-->
+<section class="dj-player-section">
+  <h2>DJ Mashups</h2>
+
+  <div class="record-container">
+    <div class="record" id="record"></div>
+    <div class="turntable-base"></div>
+    <div class="play-marker"></div>
+    <div class="tonearm"></div>
+    </div>
+     
+<div class="track-list" id="track-list"> 
+    <div class="track-square" data-track="DJ Mixes/4RawsxFOMDJ.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>4 Raws x FOMDJ</h3>
+        <p>EsdeeKid x Playboi Carti</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/AffectionxMyLove.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Affection x My Love</h3>
+        <p>Crystal Castles x Justin Timberlake</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/AstonMartinMusicxTheWay.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Aston Martin Music x The Way</h3>
+        <p>Drake x Ariana Grande</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/CaliCrazyxPursuitofHappiness.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Cali Crazy x Pursuit of Happiness</h3>
+        <p>Feng x Kid Cudi</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/DieHardxPassionfruit.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Die Hard x Passionfruit</h3>
+        <p>Kendrick Lamar x Drake</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/DreamcatcherxSlowMotion.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Dreamcatcher x Slow Motion</h3>
+        <p>Metro Boomin x Don Toliver</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/FavourxPopular.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Favour x Popular</h3>
+        <p>Avenoir x The Weeknd</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/GiveYouTheWrldxLetMeGo.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Give You The World x Let Me Go</h3>
+        <p>Steve Lacy x Daniel Caesar</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/HushxArabella.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Hush x Arabella</h3>
+        <p>The Marias x Arctic Monkeys</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/LetsDoItxLikeWeezy.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Let's Do It x Like Weezy</h3>
+        <p>Lil Baby x Playboi Carti</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/NoTimexUhUh.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>No Time x Uh Uh</h3>
+        <p>Playboi Carti x Chief Keef</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/RottweilerxOneDolla.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Rottweiler x One Dolla</h3>
+        <p>Esdeekid x Young Nudy</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/WannabexCakeByTheOcean.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Wannabe x Cake By The Ocean</h3>
+        <p>Spice Girls x DNCE</p>
+      </div>
+    </div>
+
+    <div class="track-square" data-track="DJ Mixes/YesImChangingxHeavy.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Yes I'm Changing x Heavy</h3>
+        <p>Tame Impala x The Marias</p>
+      </div>
+    </div>
+
+      <div class="track-square" data-track="DJ Mixes/YosemitexBackstreets.mp3">
+      <div class="cover"></div>
+      <div class="info">
+        <h3>Yosemite x Backstreets</h3>
+        <p>Travis Scott x Don Toliver</p>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+<audio id="dj-audio" preload="metadata"></audio>
+</section>
+
+
 <!-- LIGHTBOX -->
 <div id="lightbox">
   <span id="lightbox-close">&times;</span>
@@ -231,6 +370,55 @@ lightbox.addEventListener("click", e => {
   }
 });
 </script>
+
+<script>
+const record = document.getElementById("record");
+const trackSquares = document.querySelectorAll(".track-square");
+const djAudio = document.getElementById("dj-audio");
+
+trackSquares.forEach(track => {
+  track.addEventListener("click", () => {
+    // Reset previous flying tracks
+    trackSquares.forEach(t => {
+      t.classList.remove("active", "flying");
+      t.style.transform = "";
+      t.style.top = "";
+      t.style.left = "";
+    });
+
+    track.classList.add("active", "flying");
+
+    // Get record center position
+    const recordRect = record.getBoundingClientRect();
+    const trackRect = track.getBoundingClientRect();
+
+    const dx = recordRect.left + recordRect.width/2 - (trackRect.left + trackRect.width/2);
+    const dy = recordRect.top + recordRect.height/2 - (trackRect.top + trackRect.height/2);
+
+    // Move the track to the center of the record
+    track.style.transform = `translate(${dx}px, ${dy}px) scale(1.2)`;
+
+    // Play audio
+    const src = track.getAttribute("data-track");
+    djAudio.src = src;
+    djAudio.play();
+
+    // Spin record
+    record.classList.add("spinning");
+
+    // When audio ends, return track to list
+    djAudio.onended = () => {
+      record.classList.remove("spinning");
+      track.classList.remove("active", "flying");
+      track.style.transform = "";
+    };
+  });
+});
+
+
+</script>
+
+
 
 
 
