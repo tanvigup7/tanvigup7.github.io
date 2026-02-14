@@ -47,30 +47,102 @@ section {
 /* ===== HERO ===== */
 
 .hero {
-  text-align: center;
-  padding-top: 200px;
-  font-family: 'Reenie Beanie', cursive;
-  font-size: 3rem;
-  filter: url(#ragged-edge); /* Requires a small SVG filter in your HTML */
+  position: relative; /* allows text to layer over image */
+  width: 100%;
+  max-height: 600px; /* optional: control section height */
+  overflow: hidden;
 }
 
-.hero h1 {
-  font-size: 72px;
-  font-family: "Rubik Glitch", system-ui;
-  line-height: 1.05;
-  font-weight: 200;
-  letter-spacing: 0.02em;
+.hero .header-image {
+  width: 100%;
+  height: 100vh;
+  object-fit: contain;
+  background-color: white; /* fills width without stretching */
+}
+.hero-bullets {
+  list-style: disc;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 20px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+.hero-text {
+  position: absolute;
+  top: 50%;             /* vertically center */
+  left: 30%;            /* horizontally center */
+  transform: translate(-50%, -50%);
+  color: #6f6d6d;          /* white text over image */
+  text-align: left;
+  max-width: 700px;
+  padding: 0 20px;
+  text-shadow: 2px 2px 6px rgba(133, 119, 119, 0.7); /* makes text readable over image */
 }
 
-.hero span {
-  opacity: 0.6;
+.hero-text h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
 }
 
-.hero p {
-font-family: 'Reenie Beanie', cursive;
-  margin-top: 20px;
-  color: #9aa0aa;
+.hero-text p {
+  font-size: 1.9rem;
+  line-height: 1.6;
 }
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: left;
+  font-size: 1.0rem;
+  letter-spacing: 0.9px;
+  color: rgb(196, 51, 51);
+  opacity: 0.8;
+}
+
+
+.arrow {
+  width: 65px;      /* horizontal line */
+  height: 1px;
+  background: rgb(17, 0, 255);
+  margin: 6px auto 0;
+  position: absolute;
+  bottom: -5px;
+  left: 65%;
+  animation: slideRight 1.5s infinite ease-in-out;
+}
+.arrow .scroll-indicator {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  color: white;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrow::after {
+ content: "";
+  position: absolute;
+  right: -6px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-top: 3px solid rgb(17, 0, 255);
+  border-right: 3px solid rgb(17, 0, 255);
+  transform: rotate(45deg);
+}
+@keyframes slideRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+.arrow {
+  animation: slideRight 1.5s infinite ease-in-out;
+}
+
 
 
 /* ===== CAROUSEL ===== */
@@ -391,8 +463,8 @@ width: 160px;        /* longer for realism */
 }
 
 .track-square {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   background: linear-gradient(135deg, #444, #222);
   border-radius: 8px;
   cursor: pointer;
@@ -402,28 +474,19 @@ width: 160px;        /* longer for realism */
 }
 
 .track-square .info {
+  position: absolute;   /* overlay on square */
+  bottom: 0;            /* stick to bottom of square */
+  width: 100%;
+  background: rgba(0,0,0,0.6); /* semi-transparent background for readability */
+  color: #fff;
   text-align: center;
-  margin-top: 4px;  /* space between cover and text */
-}
-
-.track-square .info h3 {
-  font-size: 0.7rem;   /* smaller title */
+  padding: 2px 4px;    /* small padding inside overlay */
+  font-size: 0.6rem;   /* smaller text */
   line-height: 1rem;
-  margin: 2px 0;
-   /* optional: prevent long titles from wrapping */
-  overflow: hidden;
-  text-overflow: ellipsis;  /* show ... if too long */
 }
 
-.track-square .info p {
-  font-size: 0.6rem;   /* smaller artist name */
-  line-height: 0.8rem;
-  margin: 0;
-  color: #ccc;        /* optional: make it lighter */
-  
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
+
 
 .track-square:hover {
   transform: scale(1.1);
