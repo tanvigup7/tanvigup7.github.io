@@ -1,5 +1,10 @@
 /* ===== GLOBAL ===== */
-
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
 * {
   box-sizing: border-box;
 }
@@ -23,7 +28,7 @@ section {
   width: 100%;
   height: 100vh; /* This makes it exactly 100% of the screen height */
   overflow: hidden;
-  background-color: #fff; /* Matches your scan's background */
+  background-color: #000000; /* Matches your scan's background */
 }
 
 .header-image {
@@ -47,100 +52,29 @@ section {
 /* ===== HERO ===== */
 
 .hero {
-  position: relative; /* allows text to layer over image */
+  position: relative;
   width: 100%;
-  max-height: 600px; /* optional: control section height */
+  height: 100vh;      /* fill full viewport */
   overflow: hidden;
+  margin: 0;           /* remove any default spacing from body/html */
+  padding: 0;
 }
 
 .hero .header-image {
+  position: absolute;
   width: 100%;
   height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+}
+.hero .header-image2 {
+  position: absolute;
+  width: 40%;
+  height: 50vh;
+  top: 40px;
+  left: 400px;
   object-fit: contain;
-  background-color: white; /* fills width without stretching */
-}
-.hero-bullets {
-  list-style: disc;
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-left: 20px;
-  line-height: 1.6;
-  font-size: 1.1rem;
-}
-.hero-text {
-  position: absolute;
-  top: 50%;             /* vertically center */
-  left: 30%;            /* horizontally center */
-  transform: translate(-50%, -50%);
-  color: #6f6d6d;          /* white text over image */
-  text-align: left;
-  max-width: 700px;
-  padding: 0 20px;
-  text-shadow: 2px 2px 6px rgba(133, 119, 119, 0.7); /* makes text readable over image */
-}
-
-.hero-text h1 {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-}
-
-.hero-text p {
-  font-size: 1.9rem;
-  line-height: 1.6;
-}
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: left;
-  font-size: 1.0rem;
-  letter-spacing: 0.9px;
-  color: rgb(196, 51, 51);
-  opacity: 0.8;
-}
-
-
-.arrow {
-  width: 65px;      /* horizontal line */
-  height: 1px;
-  background: rgb(17, 0, 255);
-  margin: 6px auto 0;
-  position: absolute;
-  bottom: -5px;
-  left: 65%;
-  animation: slideRight 1.5s infinite ease-in-out;
-}
-.arrow .scroll-indicator {
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
-  color: white;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.arrow::after {
- content: "";
-  position: absolute;
-  right: -6px;
-  top: -4px;
-  width: 8px;
-  height: 8px;
-  border-top: 3px solid rgb(17, 0, 255);
-  border-right: 3px solid rgb(17, 0, 255);
-  transform: rotate(45deg);
-}
-@keyframes slideRight {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(6px); }
-}
-
-.arrow {
-  animation: slideRight 1.5s infinite ease-in-out;
+  z-index: 2;
 }
 
 
@@ -228,7 +162,7 @@ figcaption {
 /* ===== PHONE MUSIC ===== */
 
 .music-section {
-  text-align: center;
+  text-align: left;
   padding-bottom: 180px;
 }
 
@@ -243,7 +177,7 @@ figcaption {
   height: 560px;
   border-radius: 10px;
   padding: 18px;
-  background: #111318;
+  background: #414349;
   box-shadow: 0 40px 120px rgba(0,0,0,0.7);
   display: flex;
   flex-direction: column;
@@ -278,7 +212,7 @@ figcaption {
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #444, #222);
+  background: linear-gradient(135deg, #949292, #424040);
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
@@ -296,7 +230,7 @@ figcaption {
 .track p {
   margin: 2px 0 0;
   font-size: 12px;
-  color: #8c8f98;
+  color: #b3b4b6;
 }
 
 /* hide scrollbar for aesthetic */
