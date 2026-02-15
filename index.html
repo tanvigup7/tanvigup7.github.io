@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <header class="hero-header">
-  <img src="Images/header-fixed.JPEG" alt="Header Art" class="header-image">
+  <img src="Images/header.JPEG" alt="Header Art" class="header-image">
   </div>
 </header>
   <meta charset="UTF-8" />
@@ -17,15 +17,38 @@
   <!-- HERO -->
   <section class="hero">
   <img src="Images/batman.jpeg" alt="Batman Art" class="header-image">
-  <img src="Images/caption.PNG" alt="Batman Art" class="header-image">
-  
-  <div class="moving-banner">
-    <span>Hi, I’m Tanvi! I'm an undergraduate Computer Science student currently working at H2O AI.</span>
-  </div>
+<div id="belt-container">
+    <div id="belt">
+        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
+        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
+        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
+        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
+        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
+        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
+        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
+    </div>
+</div>
+
+</div>
+
+<div class="arched-text-container">
+  <svg viewBox="0 0 500 200" class="arched-svg">
+    <path id="curve" d="M50,150 Q250,50 450,150" fill="transparent" />
+    <text>
+      <textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">
+        Who I think I am
+        <tspan fill="#c43333" font-weight="bold">➔</tspan>
+      </textPath>
+    </text>
+  </svg>
+</div>
+
+
 </section>
+
   <!-- ART CAROUSEL -->
-<section class="gallery-section">
-  <h2>art work</h2>
+  <section class="gallery-section">
+    <h2>art work</h2>
 
   <div class="gallery" id="gallery">
 
@@ -301,6 +324,10 @@ tracks.forEach(track => {
 <audio id="dj-audio" preload="metadata"></audio>
 </section>
 
+<section class="bottom">
+  <img src="Images/blackhole.png" alt="Black Hole" class="bottom-image">
+
+</section>
 
 <!-- LIGHTBOX -->
 <div id="lightbox">
@@ -414,8 +441,35 @@ trackSquares.forEach(track => {
 
 </script>
 
+<script>
+const belt = document.getElementById("belt");
+let beltPosition = 0;
+const resetPoint = 62.5; 
 
+setInterval(() => {
+    beltPosition += 0.08;
+    if (beltPosition >= resetPoint) {
+        beltPosition = 0;
+    }
+    belt.style.transform = `translateX(-${beltPosition}vw)`;
+}, 20);
+</script>
 
+<script>
+  const headerArea = document.querySelector('header');
+
+headerArea.addEventListener('mousemove', (e) => {
+  const rect = headerArea.getBoundingClientRect();
+  
+  // Calculate mouse position relative to the header
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  // Send these coordinates to CSS variables
+  headerArea.style.setProperty('--x', `${x}px`);
+  headerArea.style.setProperty('--y', `${y}px`);
+});
+</script>
 
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
