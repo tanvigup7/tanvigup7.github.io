@@ -187,15 +187,16 @@ tracks.forEach(track => {
 </script>
 
  <!-- DJ Section-->
-<section class="dj-player-section">
-  <h2>song mashups</h2>
-
-  <div class="record-container">
-    <div class="record" id="record"></div>
+  <section class="dj-container">
+<div class="dj-hero-image">
+  <h2 class="dj-title">song mashups</h2>
+  
+  <div class="record-container sideways">
     <div class="turntable-base"></div>
-    <div class="play-marker"></div>
+    <div class="record" id="record"></div>
     <div class="tonearm"></div>
-    </div>
+  </div>
+</div>
      
 <div class="track-list" id="track-list"> 
     <div class="track-square" data-track="DJ Mixes/4RawsxFOMDJ.mp3">
@@ -290,7 +291,7 @@ tracks.forEach(track => {
       <div class="cover"></div>
       <div class="info">
         <h3>Rottweiler x One Dolla</h3>
-        <p>Esdeekid x Young Nudy</p>
+        <p>EsdeeKid x Young Nudy</p>
       </div>
     </div>
 
@@ -319,15 +320,11 @@ tracks.forEach(track => {
     </div>
   </div>
 </div>
-  
 
 <audio id="dj-audio" preload="metadata"></audio>
 </section>
 
-<section class="bottom">
-  <img src="Images/blackhole.png" alt="Black Hole" class="bottom-image">
 
-</section>
 
 <!-- LIGHTBOX -->
 <div id="lightbox">
@@ -437,8 +434,6 @@ trackSquares.forEach(track => {
     };
   });
 });
-
-
 </script>
 
 <script>
