@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -75,10 +77,12 @@
   </div>
 </section>
   <!-- MUSIC / PHONE MOCKUP -->
-  <section class="music-section">
-  <h2>my beat remakes and remixes</h2>
 
-  <div class="phone" id="phone-player">
+  <section class="music-section">
+
+    <div class="music-image">
+      <h2>my beat remakes and remixes</h2>
+      <div class="phone" id="phone-player">
     <div class="screen">
 
       <div class="track active" data-track="Sample Beats/cloudRapBeat.mp3">
@@ -163,6 +167,8 @@
 
     </div>
   </div>
+    </div>
+  
 
   <!-- Mini Audio Player -->
   <audio id="audio-player" preload="metadata"></audio>
@@ -322,6 +328,9 @@ tracks.forEach(track => {
 </div>
 
 <audio id="dj-audio" preload="metadata"></audio>
+  <footer>
+    Contact: tanvi9g@gmail.com
+  </footer>
 </section>
 
 
@@ -334,9 +343,7 @@ tracks.forEach(track => {
 </div>
 
 
-  <footer>
-    Contact: tanvi9g@gmail.com
-  </footer>
+
 <script>
 const gallery = document.getElementById("gallery");
 const slides = document.querySelectorAll(".slide");

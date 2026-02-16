@@ -190,24 +190,34 @@ header img, .header-image, .hero img {
     75% { transform: rotate(-5.05deg) translateY(-1px) skew(-4.9deg); }
     100% { transform: rotate(-5deg) translateY(0px) skew(-5deg); }
 }
+
 .arched-text-container {
   position: absolute;
-  top: -25%;
-  width: 100%;
+  top: 2%; 
+  left: 45%;
+  
+  /* translate(-50%) keeps the center of the arch at the 50% left mark */
+  transform: translate(-50%, 0); 
+  
+  /* Make the width a % of the hero so it shrinks/grows with the art */
+  width: 50%; 
+  max-width: 600px;
+  
   z-index: 10;
   pointer-events: none;
 }
 
+/* 3. Make sure the SVG scales inside that container */
 .arched-svg {
   width: 100%;
   height: auto;
-  overflow: visible;
+  display: block;
   animation: bounceRight 2s infinite ease-in-out;
 }
 
 .arched-svg text {
   font-family: 'Permanent Marker', cursive;
-  font-size: 15px;
+  font-size: 35px;
   fill: #c43333;
   letter-spacing: 1px;
 }
@@ -305,25 +315,53 @@ figcaption {
 /* ===== PHONE MUSIC ===== */
 
 .music-section {
+  padding: 0; /* Remove padding so the image can be true full-width */
   text-align: left;
-  padding-bottom: 180px;
 }
 
 .music-section h2 {
-  margin-bottom: 40px;
-  letter-spacing: 0.05em;
+
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  
+  /* Apply the new font */
+  font-family: "Bitcount Grid Double", sans-serif;
+  
+  /* Styling to make it pop against the industrial background */
+  font-size: 2.5rem;
+  color: #ffbcbc;
+  text-transform: uppercase;
+  letter-spacing: 3px; /* Gives it that digital/LED display feel */
+  
+  /* Keep your shadow for depth */
+  text-shadow: 3px 3px 0px #c43333; 
+  z-index: 10;
+}
+
+.music-image {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Changed to 100vh so it covers exactly one screen height */
+  background: url('Images/music.jpg') no-repeat center center / cover;
+  overflow: hidden;
 }
 
 .phone {
-  margin: 60px auto;
-  width: 320px;
-  height: 560px;
-  border-radius: 10px;
+  position: absolute;
+  /* PINNING: Adjust these % to place the phone on a specific spot in your art */
+  top: 65%;
+  left: 42%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  width: 340px;
+  height: 180px;
+  border-radius: 20px; /* Rounded for the phone look */
   padding: 18px;
-  background: #414349;
-  box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+  background: #1a1a1a; /* Darker, more industrial phone frame */
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
   display: flex;
   flex-direction: column;
+  z-index: 10;
 }
 
 .screen {
@@ -355,9 +393,18 @@ figcaption {
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #949292, #424040);
   flex-shrink: 0;
   transition: transform 0.3s ease;
+
+  /* The Image Logic */
+  background-image: url('Images/purple.JPEG');
+  background-size: cover;      /* Makes sure the photo fills the square */
+  background-position: center; /* Centers the crop */
+  background-repeat: no-repeat;
+  
+  /* Fallback color if image is missing */
+  background-color: #424040; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .track.active .cover {
@@ -368,6 +415,7 @@ figcaption {
   margin: 0;
   font-size: 14px;
   font-weight: 500;
+  color: #b3b4b6;
 }
 
 .track p {
@@ -376,10 +424,6 @@ figcaption {
   color: #b3b4b6;
 }
 
-/* hide scrollbar for aesthetic */
-.screen::-webkit-scrollbar {
-  display: none;
-}
 
 
 /* ===== PROJECTS ===== */
@@ -483,9 +527,18 @@ figcaption {
   position: absolute;
   top: 20px;
   left: 20px;
-  color: #fff;
-  font-family: 'Permanent Marker', cursive;
-  text-shadow: 3px 3px 0px #000;
+  
+  /* Apply the new font */
+  font-family: "Bitcount Grid Double", sans-serif;
+  
+  /* Styling to make it pop against the industrial background */
+  font-size: 2.5rem;
+  color: #ffbcbc;
+  text-transform: uppercase;
+  letter-spacing: 3px; /* Gives it that digital/LED display feel */
+  
+  /* Keep your shadow for depth */
+  text-shadow: 3px 3px 0px #c43333; 
   z-index: 10;
 }
 
