@@ -27,6 +27,8 @@ body {
 
 /* spacing */
 
+
+
 .header-header {
   position: relative;
   width: 100%;
@@ -41,37 +43,9 @@ body {
   height: 100%;
   mix-blend-mode: multiply;
   object-fit: contain;
-  filter: contrast(1.1); 
-  filter: brightness(0.9); /* Slight dim on base image for the light to pop */
   transition: filter 0.3s;
 }
 
-header::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  
-  /* 'light' effect */
-  background: radial-gradient(
-    circle at var(--x, 50%) var(--y, 50%), 
-    rgba(255, 240, 200, 0.3) 0%, 
-    transparent 20%
-  );
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-header:hover::after {
-  opacity: 1;
-}
-
-header:hover img {
-  filter: brightness(1.1);
-}
 
 /* ===== HERO ===== */
 * {
@@ -713,6 +687,169 @@ display: grid;
   z-index: 9999;
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy 'landing' effect */
 
+}
+.guestbook-section {
+  background: #000; /* Black background to make the white cards pop */
+  padding: 100px 0;
+  min-height: 100vh;
+}
+
+.stamped-title {
+  color: #c43333; /* Your signature red */
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  transform: rotate(-1deg);
+}
+
+.guestbook-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+.guestbook-callout {
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: lowercase;
+  color: #676565; /* Regular text color */
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.guestbook-callout a {
+  color: #c43333; /* Your signature red */
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+#flashlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  
+  /* Applying the animation */
+  animation: flicker 4s infinite;
+  
+  /* Initial state */
+  background: radial-gradient(
+    circle 180px at var(--x, 50%) var(--y, 50%), 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.8) 80%
+  );
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+    background: radial-gradient(
+      circle 180px at var(--x, 50%) var(--y, 50%), 
+      transparent 0%, 
+      rgba(0, 0, 0, 0.7) 80%
+    );
+  }
+  20%, 24%, 55% {
+    opacity: 0.8; /* Dim momentarily */
+    background: radial-gradient(
+      circle 170px at var(--x, 50%) var(--y, 50%), 
+      transparent 0%, 
+      rgba(0, 0, 0, 0.393) 90%
+    );
+  }
+}
+.guestbook-callout a:hover {
+  background-color: #c43333;
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.entry-card {
+  background: #fdfaf4; /* That paper texture color from your body */
+  color: #111;
+  width: 800px; /* Fixed desktop width */
+  padding: 30px;
+  border-left: 10px solid #c43333; /* Red industrial stripe */
+  box-shadow: 10px 10px 0px rgba(196, 51, 51, 0.2); /* Flat offset shadow */
+  position: relative;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.visitor-message {
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.red-stamp {
+  position: absolute;
+  border: 4px solid #c43333;
+  color: #c43333;
+  padding: 4px 12px;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-radius: 4px;
+  
+  /* Ink effect: slightly see-through and grainy */
+  opacity: 0.7;
+  letter-spacing: 2px;
+  pointer-events: none; /* Mouse clicks go through it */
+  user-select: none;    /* Can't highlight the text */
+}
+.top-nav {
+  position: fixed;
+  top: 40px;
+  left: 50px;
+  z-index: 10001; /* Higher than the flashlight so you can always click it */
+}
+
+.back-btn {
+  font-family: 'Courier New', Courier, monospace;
+  color: #c43333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  border: 1px solid #c43333;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.8); /* Dark background to pop through the dimming */
+}
+
+.back-btn:hover {
+  background: #c43333;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(196, 51, 51, 0.6);
+  transform: translateY(-2px);
+}
+
+.back-btn .arrow {
+  margin-right: 8px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.back-btn:hover .arrow {
+  transform: translateX(-5px); /* Arrow kicks back when you hover */
 }
 /* ===== FOOTER ===== */
 footer {

@@ -3,7 +3,7 @@
 <head>
   <header class="hero-header">
   <img src="Images/header.JPEG" alt="Header Art" class="header-image">
-  </div>
+  <div class="header-overlay" id="header-reveal"></div>
 </header>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -509,18 +509,16 @@ setInterval(() => {
 </script>
 
 <script>
-  const headerArea = document.querySelector('header');
+const header = document.querySelector('.image-header');
+const reveal = document.getElementById('header-reveal');
 
-headerArea.addEventListener('mousemove', (e) => {
-  const rect = headerArea.getBoundingClientRect();
+header.addEventListener('mousemove', e => {
+  const rect = header.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
   
-  // Calculate mouse position relative to the header
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  
-  // Send these coordinates to CSS variables
-  headerArea.style.setProperty('--x', `${x}px`);
-  headerArea.style.setProperty('--y', `${y}px`);
+  reveal.style.setProperty('--x', x + '%');
+  reveal.style.setProperty('--y', y + '%');
 });
 </script>
 

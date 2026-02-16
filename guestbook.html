@@ -1,0 +1,114 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" > 
+    <title>Guestbook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="top-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">←</span> RETURN_TO_HOME_BASE
+  </a>
+</nav>
+    <div id="flashlight"></div>
+<section class="guestbook-section">
+  <div class="guestbook-container">
+    <h2 class="stamped-title">GUEST BOOK</h2>
+    <p class="guestbook-callout">
+  Click 
+  <a href=" https://forms.gle/iqXMCG2cx22DrjWv7" target="_blank" rel="noopener noreferrer">
+    here</a> 
+   to sign the guest book and leave a message!
+</p> 
+    
+    <div class="guestbook-entries">
+
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="visitor-name">GUEST_042</span>
+          <span class="entry-date">2026.02.15</span>
+        </div>
+        <p class="visitor-message"> </p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    let jitterX = 0;
+let jitterY = 0;
+
+window.addEventListener('mousemove', e => {
+  // Add a tiny bit of random vibration (-2px to +2px)
+  jitterX = (Math.random() - 0.5) * 4;
+  jitterY = (Math.random() - 0.5) * 4;
+
+  const x = ((e.clientX + jitterX) / window.innerWidth) * 100;
+  const y = ((e.clientY + jitterY) / window.innerHeight) * 100;
+  
+  flashlight.style.setProperty('--x', x + '%');
+  flashlight.style.setProperty('--y', y + '%');
+});
+</script>
+<script>
+function applyRandomStamps() {
+  const cards = document.querySelectorAll('.entry-card');
+
+  cards.forEach(card => {
+    // 1. Check if the card already has a stamp (to avoid duplicates)
+    if (card.querySelector('.red-stamp')) return;
+
+    // 2. 60% chance to get a stamp
+    if (Math.random() > 0.4) {
+      const stamp = document.createElement('div');
+      stamp.className = 'red-stamp';
+      stamp.innerText = 'VERIFIED';
+
+      // 3. Randomize the look so it feels 'hand-stamped'
+      const randomRotate = Math.floor(Math.random() * 30) - 15; // -15deg to 15deg
+      const randomRight = Math.floor(Math.random() * 20) + 10;   // 10px to 30px
+      const randomBottom = Math.floor(Math.random() * 15) + 5;   // 5px to 20px
+
+      stamp.style.transform = `rotate(${randomRotate}deg)`;
+      stamp.style.right = `${randomRight}px`;
+      stamp.style.bottom = `${randomBottom}px`;
+
+      card.appendChild(stamp);
+    }
+  });
+}
+
+// Run it when the page loads
+window.addEventListener('DOMContentLoaded', applyRandomStamps);
+</script>
+<script>
+   const inputs = document.querySelectorAll('.terminal-input');
+
+inputs.forEach(input => {
+  input.addEventListener('focus', () => {
+    flashlight.style.opacity = "0.5"; // Dim the darkness so they can see to type
+  });
+  input.addEventListener('blur', () => {
+    flashlight.style.opacity = "1"; // Bring back the full effect
+  });
+});
+
+window.addEventListener('mousemove', e => {
+  // We use percentages to stay consistent with your 1200px desktop lock
+  const x = (e.clientX / window.innerWidth) * 100;
+  const y = (e.clientY / window.innerHeight) * 100;
+  
+  flashlight.style.setProperty('--x', x + '%');
+  flashlight.style.setProperty('--y', y + '%');
+});
+
+// For Mobile Tapping (since you like the Zoomed-Out look)
+window.addEventListener('touchmove', e => {
+  const touch = e.touches[0];
+  const x = (touch.clientX / window.innerWidth) * 100;
+  const y = (touch.clientY / window.innerHeight) * 100;
+  
+  flashlight.style.setProperty('--x', x + '%');
+  flashlight.style.setProperty('--y', y + '%');
+});
+</script>
+</body>
