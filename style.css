@@ -1,31 +1,32 @@
 /* ===== GLOBAL ===== */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-    overflow-x: hidden;
-}
-* {
-    margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
   font-family: "Helvetica Neue", system-ui, sans-serif;
   background: #fdfaf4;
-  color: #111;
+  color: #ffffff;
   background-image: url("images/paper-texture.jpg");
+  background-attachment: fixed; 
   background-size: cover;
+  
+  overflow-x: hidden; 
+  overscroll-behavior-y: none;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* spacing */
-section {
-  padding: 120px 8vw;
-}
+
 .header-header {
   position: relative;
   width: 100%;
@@ -88,13 +89,14 @@ header:hover img {
   padding: 0;
 }
 
-.hero .header-image {
+.hero-image {
   width: 100%;
   height: 100%;
   mix-blend-mode: multiply;
   object-fit: cover; 
   z-index: 1;
 }
+
 
 header img, .header-image, .hero img {
   display: block;
@@ -112,7 +114,7 @@ header img, .header-image, .hero img {
     padding: 10px 0;
     transform: rotate(-5deg);
     
-    /* CAUTION TAPe */
+    /* CAUTION TAPE */
     background-color: #ffcc00;
     background-image: repeating-linear-gradient(
       -45deg,
@@ -174,10 +176,9 @@ header img, .header-image, .hero img {
   top: 2%; 
   left: 45%;
   
-  /* translate(-50%) keeps the center of the arch at the 50% left mark */
   transform: translate(-50%, 0); 
   
-  /* Make the width a % of the hero so it shrinks/grows with the art */
+  
   width: 50%; 
   max-width: 600px;
   
@@ -187,7 +188,7 @@ header img, .header-image, .hero img {
 
 /* 3. Make sure the SVG scales inside that container */
 .arched-svg {
-  width: 100%;
+  width: 400px;
   height: auto;
   display: block;
   animation: bounceRight 2s infinite ease-in-out;
@@ -213,25 +214,73 @@ header img, .header-image, .hero img {
 /* ===== CAROUSEL ===== */
 
 .gallery-section {
-  padding: 60px 0;
+  position: relative;
+  padding: 120px 0 60px 0; /* Extra top padding to make room for images */
+  background: #000000;
+  overflow: hidden;
 }
 
-.gallery-section h2 {
-  padding-left: 8vw;
-  margin-bottom: 40px;
+.top-decoration {
+  position: absolute;
+  top: 20px; /* Distance from the top of the ART WORK section */
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  z-index: 5;
+  /* Remove mix-blend-mode if the background is black, 
+     or use 'screen' if you want them to look ghost-like */
+}
+
+.chain {
+  left: 10%;
+  top: -5%;
+width: 70px; 
+  height: auto;
+  z-index: 5;
+  transition: transform 0.3s ease;
+}
+
+.chain:hover {
+  cursor: pointer;
+  transform: rotate(-5deg) skew(-5deg) scale(1.1);
+  z-index: 15; /* Optional: brings it to the front on hover */
+}
+.fella {
+  position: absolute; /* MUST have this for 'right' and 'z-index' to work */
+  right: 0;
+  top: 20px;         /* Adjust this based on where you want it */
+  width: 300px; 
+  height: auto;
+  z-index: 5;
+  transition: transform 0.3s ease; /* Transition the specific property for smoothness */
+}
+
+/* Change .fella-hover to .fella:hover */
+.fella:hover {
+  cursor: pointer;
+  transform: rotate(-5deg) skew(-5deg) scale(1.1);
+  z-index: 15; /* Optional: brings it to the front on hover */
+}
+
+.slide {
+  flex: 0 0 400px; /* Keeps your gallery images at a fixed desktop size */
+  scroll-snap-align: left;
 }
 
 /* horizontal cinematic scroll */
 .gallery {
   display: flex;
-  gap: 60px;
+  gap: 40px;
   padding: 0 10vw;
-
-  overflow-x: auto;
+  overflow-x: scroll; /* Changed to scroll to ensure interaction */
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-
   cursor: grab;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.gallery::-webkit-scrollbar {
+  display: none;
 }
 
 .gallery:active {
@@ -240,20 +289,19 @@ header img, .header-image, .hero img {
 
 /* slides */
 .slide {
-  flex: 0 0 60vw;
+  flex: 0 50 150px; /* Small "OG" thumbnail size */
+  cursor: pointer;
+   width: 70vw;    /* Shows one main image and a peek of the next */
   scroll-snap-align: center;
-  position: relative;
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  margin: 0;
 }
 
 .slide img {
-  width: 100%;
-  height: 50vh;
-  object-fit: cover;
-  border-radius: 26px;
-
-  filter: brightness(0.9);
-  transition: 0.6s ease;
+  width: 250px;
+  height: auto;
+  object-fit: contain; /* Keeps them as perfect squares */
+  border-radius: 12px;
+  transition: transform 0.3s ease, filter 0.3s;
 }
 
 /* depth effect */
