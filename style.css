@@ -76,7 +76,19 @@ header img, .header-image, .hero img {
   display: block;
   width: 100%;
 }
+.guestbook-text {
+  position: absolute;
+  font-family: 'Permanent Marker', cursive;
+  /* POSITIONING: Change these percentages to move it exactly where you want */
+  top: 48%;  
+  left: 10%; 
+  font-size: 1.8rem;
+  z-index: 10;
+  color: rgb(160, 30, 212);
 
+    transform: rotate(-5deg);
+  text-shadow: 0 0 20px rgba(0,0,0,0.8); /* Makes it readable over the art */
+}
 /* ===== BELT ===== */
 #belt-container {
   position: absolute;
