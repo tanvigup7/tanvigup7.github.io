@@ -82,14 +82,31 @@
 
     <div class="music-image">
       <h2>my beat remakes and remixes</h2>
+     
       <div class="phone" id="phone-player">
     <div class="screen">
+        
+      <div class="track" data-track="Sample Beats/rrAnthemRemake.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>RR Anthem Beat Remake</h3>
+          <p>Kankan</p>
+        </div>
+      </div>
+
+      <div class="track" data-track="Sample Beats/SkeletonsRemix.mp3">
+        <div class="cover"></div>
+        <div>
+          <h3>Skeletons Remix</h3>
+          <p>Travis Scott</p>
+        </div>
+      </div>
 
       <div class="track active" data-track="Sample Beats/cloudRapBeat.mp3">
         <div class="cover"></div>
         <div>
           <h3>Original Cloud Rap Beat</h3>
-          <p>made by me!</p>
+          <p>made by me</p>
         </div>
       </div>
 
@@ -137,7 +154,7 @@
         <div class="cover"></div>
         <div>
           <h3>Original Pop Beat</h3>
-          <p>made by me!</p>
+          <p>made by me</p>
         </div>
       </div>
 
@@ -149,21 +166,7 @@
         </div>
       </div>
 
-            <div class="track" data-track="Sample Beats/rrAnthemRemake.mp3">
-        <div class="cover"></div>
-        <div>
-          <h3>RR Anthem Beat Remake</h3>
-          <p>Kankan</p>
-        </div>
-      </div>
 
-            <div class="track" data-track="Sample Beats/SkeletonsRemix.mp3">
-        <div class="cover"></div>
-        <div>
-          <h3>Skeletons Remix</h3>
-          <p>Travis Scott</p>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -202,8 +205,7 @@ tracks.forEach(track => {
     <div class="record" id="record"></div>
     <div class="tonearm"></div>
   </div>
-</div>
-     
+  <div class="dj-control-panel">
 <div class="track-list" id="track-list"> 
     <div class="track-square" data-track="DJ Mixes/4RawsxFOMDJ.mp3">
       <div class="cover"></div>
@@ -327,10 +329,12 @@ tracks.forEach(track => {
   </div>
 </div>
 
+</div>  
+
+</div>
+
 <audio id="dj-audio" preload="metadata"></audio>
-  <footer>
-    Contact: tanvi9g@gmail.com
-  </footer>
+ 
 </section>
 
 
@@ -400,47 +404,70 @@ lightbox.addEventListener("click", e => {
 
 <script>
 const record = document.getElementById("record");
-const trackSquares = document.querySelectorAll(".track-square");
 const djAudio = document.getElementById("dj-audio");
 
-trackSquares.forEach(track => {
-  track.addEventListener("click", () => {
-    // Reset previous flying tracks
-    trackSquares.forEach(t => {
-      t.classList.remove("active", "flying");
-      t.style.transform = "";
-      t.style.top = "";
-      t.style.left = "";
+let currentDockedTrack = null;
+
+document.querySelectorAll(".track-square").forEach(track => {
+  track.addEventListener("click", function() {
+    // 1. Remove old track from record if it exists
+    if (currentDockedTrack) currentDockedTrack.remove();
+    
+    // 2. Get coordinates BEFORE we do anything
+    const trackRect = this.getBoundingClientRect();
+    const recordRect = record.getBoundingClientRect();
+
+    // 3. Create the 'Flying' Clone
+    const clone = this.cloneNode(true);
+    clone.style.width = trackRect.width + 'px';
+    clone.style.height = trackRect.height + 'px';
+    clone.style.top = trackRect.top + 'px';
+    clone.style.left = trackRect.left + 'px';
+    clone.classList.add('flying');
+    
+    document.body.appendChild(clone);
+
+    // 4. Calculate the 'Target' (center of record)
+    const targetX = recordRect.left + (recordRect.width / 2) - (trackRect.width / 2);
+    const targetY = recordRect.top + (recordRect.height / 2) - (trackRect.height / 2);
+
+    // 5. Start Flight (Small delay to let browser register the clone)
+    requestAnimationFrame(() => {
+      clone.style.left = targetX + 'px';
+      clone.style.top = targetY + 'px';
+      clone.style.transform = "rotate(360deg) scale(1.1)"; // Spins while flying
     });
 
-    track.classList.add("active", "flying");
+    // 6. Docking (Wait for animation to finish)
+    setTimeout(() => {
+      clone.classList.remove('flying');
+      clone.classList.add('docked');
+      
+      // Reset position so it centers inside the record parent
+      clone.style.left = "50%";
+      clone.style.top = "50%";
+      clone.style.transform = "translate(-50%, -50%)";
+      
+      record.appendChild(clone); // Physically move it inside the spinning record
+      currentDockedTrack = clone;
 
-    // Get record center position
-    const recordRect = record.getBoundingClientRect();
-    const trackRect = track.getBoundingClientRect();
-
-    const dx = recordRect.left + recordRect.width/2 - (trackRect.left + trackRect.width/2);
-    const dy = recordRect.top + recordRect.height/2 - (trackRect.top + trackRect.height/2);
-
-    // Move the track to the center of the record
-    track.style.transform = `translate(${dx}px, ${dy}px) scale(1.2)`;
-
-    // Play audio
-    const src = track.getAttribute("data-track");
-    djAudio.src = src;
-    djAudio.play();
-
-    // Spin record
-    record.classList.add("spinning");
-
-    // When audio ends, return track to list
-    djAudio.onended = () => {
-      record.classList.remove("spinning");
-      track.classList.remove("active", "flying");
-      track.style.transform = "";
-    };
+      // 2. MOVE THE TONEARM
+  const tonearm = document.querySelector('.tonearm');
+  tonearm.classList.add('playing');
+      // Play Audio & Spin
+      djAudio.src = this.getAttribute("data-track");
+      djAudio.play();
+      record.classList.add("spinning");
+    }, 600);
   });
 });
+
+djAudio.onended = () => {
+    record.classList.remove("spinning");
+    const tonearm = document.querySelector('.tonearm');
+  tonearm.classList.remove('playing');
+    if (currentDockedTrack) currentDockedTrack.remove();
+};
 </script>
 
 <script>
@@ -472,6 +499,7 @@ headerArea.addEventListener('mousemove', (e) => {
   headerArea.style.setProperty('--y', `${y}px`);
 });
 </script>
+
 
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
