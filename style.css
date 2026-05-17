@@ -45,6 +45,138 @@ body {
   object-fit: contain;
   transition: filter 0.3s;
 }
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 24px 40px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  z-index: 10001;
+}
+
+.top-nav .logo {
+  color: white;
+  font-size: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: #777;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* DARK OVERLAY (important for readability) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+/* TERMINAL WINDOW */
+.terminal-window {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translateY(-90%);
+  width: 420px;
+
+  background: rgba(10,10,10,0.85);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+
+/* TOP BAR */
+.terminal-topbar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #444;
+}
+
+.filename {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  color: #666;
+}
+
+/* CONTENT */
+.terminal-content {
+  padding: 20px;
+  font-family: monospace;
+  color: #ddd;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.keyword { color: #9cdcfe; }
+.string { color: #ce9178; }
+.comment { color: #6a9955; }
+
+.terminal-content h1 {
+  margin-top: 15px;
+  font-size: 28px;
+  color: white;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 15px;
+  line-height: 1.5;
+}
 
 
 /* ===== HERO ===== */
@@ -63,6 +195,7 @@ body {
   padding: 0;
 }
 
+
 .hero-image {
   width: 100%;
   height: 100%;
@@ -80,7 +213,7 @@ header img, .header-image, .hero img {
   position: absolute;
   font-family: 'Permanent Marker', cursive;
   /* POSITIONING: Change these percentages to move it exactly where you want */
-  top: 48%;  
+  top: 62%;  
   left: 10%; 
   font-size: 1.8rem;
   z-index: 10;
@@ -159,8 +292,8 @@ header img, .header-image, .hero img {
 
 .arched-text-container {
   position: absolute;
-  top: 2%; 
-  left: 45%;
+  top: 18%; 
+  left: 63%;
   
   transform: translate(-50%, 0); 
   
@@ -826,12 +959,6 @@ display: grid;
   letter-spacing: 2px;
   pointer-events: none; /* Mouse clicks go through it */
   user-select: none;    /* Can't highlight the text */
-}
-.top-nav {
-  position: fixed;
-  top: 40px;
-  left: 50px;
-  z-index: 10001; /* Higher than the flashlight so you can always click it */
 }
 
 .back-btn {
