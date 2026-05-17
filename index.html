@@ -8,6 +8,7 @@
   <div class="nav-links">
     <a href="playground.html">tinker</a>
     <a href="projects.html">projects</a>
+    <a href="guestbook.html">guestbook</a>
   </div>
 </nav>
 
@@ -46,23 +47,22 @@
     </div>
 
   </div>
-  <p class="guestbook-text">
-  Click 
-  <a href=" guestbook.html" target="_blank" rel="noopener noreferrer">
-    here</a> 
-   to view and sign the guest book!
-</p> 
-<div id="belt-container">
-    <div id="belt">
-        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
-        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
-        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
-        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
-        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
-        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
-        <span class="belt-text">CODE x ART x SOUND &nbsp;⚠️&nbsp; </span>
-    </div>
-</div>
+
+  <div class="spotify-widget">
+
+  <div class="spotify-header">
+    <span class="spotify-dot"></span>
+    <p>LISTENING_TO:</p>
+  </div>
+
+  <div class="spotify-bar">
+    <div class="spotify-fill"></div>
+  </div>
+
+  <h3>Playboi Carti — Long Time</h3>
+
+</div> 
+
 <div class="arched-text-container">
   <svg viewBox="0 0 500 200" class="arched-svg">
     <path id="curve" d="M50,150 Q250,50 450,150" fill="transparent" />
@@ -85,170 +85,4 @@
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double&display=swap" rel="stylesheet">
 </head>
 
-<body>
-
-<!-- LIGHTBOX -->
-<div id="lightbox">
-  <span id="lightbox-close">&times;</span>
-  <img id="lightbox-img" src="" />
-  <figcaption id="lightbox-caption"></figcaption>
-</div>
-
-
-
-<script>
-const gallery = document.getElementById("gallery");
-const slides = document.querySelectorAll(".slide");
-
-function updateActive() {
-  const center = gallery.scrollLeft + gallery.offsetWidth / 2;
-
-  slides.forEach(slide => {
-    const slideCenter =
-      slide.offsetLeft + slide.offsetWidth / 2;
-
-    const dist = Math.abs(center - slideCenter);
-
-    if (dist < slide.offsetWidth / 2) {
-      slide.classList.add("active");
-    } else {
-      slide.classList.remove("active");
-    }
-  });
-}
-
-gallery.addEventListener("scroll", updateActive);
-updateActive();
-</script>
-<script>
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const lightboxCaption = document.getElementById("lightbox-caption");
-const lightboxClose = document.getElementById("lightbox-close");
-
-slides.forEach(slide => {
-  slide.addEventListener("click", () => {
-    const img = slide.querySelector("img");
-    const caption = slide.querySelector("figcaption").innerText;
-
-    lightboxImg.src = img.src;
-    lightboxCaption.innerText = caption;
-
-    lightbox.style.display = "flex";
-  });
-});
-
-lightboxClose.addEventListener("click", () => {
-  lightbox.style.display = "none";
-});
-
-// close lightbox when clicking outside the image
-lightbox.addEventListener("click", e => {
-  if (e.target === lightbox) {
-    lightbox.style.display = "none";
-  }
-});
-</script>
-
-<script>
-const record = document.getElementById("record");
-const djAudio = document.getElementById("dj-audio");
-
-let currentDockedTrack = null;
-
-document.querySelectorAll(".track-square").forEach(track => {
-  track.addEventListener("click", function() {
-    // 1. Remove old track from record if it exists
-    if (currentDockedTrack) currentDockedTrack.remove();
-    
-    // 2. Get coordinates BEFORE we do anything
-    const trackRect = this.getBoundingClientRect();
-    const recordRect = record.getBoundingClientRect();
-
-    // 3. Create the 'Flying' Clone
-    const clone = this.cloneNode(true);
-    clone.style.width = trackRect.width + 'px';
-    clone.style.height = trackRect.height + 'px';
-    clone.style.top = trackRect.top + 'px';
-    clone.style.left = trackRect.left + 'px';
-    clone.classList.add('flying');
-    
-    document.body.appendChild(clone);
-
-    // 4. Calculate the 'Target' (center of record)
-    const targetX = recordRect.left + (recordRect.width / 2) - (trackRect.width / 2);
-    const targetY = recordRect.top + (recordRect.height / 2) - (trackRect.height / 2);
-
-    // 5. Start Flight (Small delay to let browser register the clone)
-    requestAnimationFrame(() => {
-      clone.style.left = targetX + 'px';
-      clone.style.top = targetY + 'px';
-      clone.style.transform = "rotate(360deg) scale(1.1)"; // Spins while flying
-    });
-
-    // 6. Docking (Wait for animation to finish)
-    setTimeout(() => {
-      clone.classList.remove('flying');
-      clone.classList.add('docked');
-      
-      // Reset position so it centers inside the record parent
-      clone.style.left = "50%";
-      clone.style.top = "50%";
-      clone.style.transform = "translate(-50%, -50%)";
-      
-      record.appendChild(clone); // Physically move it inside the spinning record
-      currentDockedTrack = clone;
-
-      // 2. MOVE THE TONEARM
-  const tonearm = document.querySelector('.tonearm');
-  tonearm.classList.add('playing');
-      // Play Audio & Spin
-      djAudio.src = this.getAttribute("data-track");
-      djAudio.play();
-      record.classList.add("spinning");
-    }, 600);
-  });
-});
-
-djAudio.onended = () => {
-    record.classList.remove("spinning");
-    const tonearm = document.querySelector('.tonearm');
-  tonearm.classList.remove('playing');
-    if (currentDockedTrack) currentDockedTrack.remove();
-};
-</script>
-
-<script>
-const belt = document.getElementById("belt");
-let beltPosition = 0;
-const resetPoint = 62.5; 
-
-setInterval(() => {
-    beltPosition += 0.08;
-    if (beltPosition >= resetPoint) {
-        beltPosition = 0;
-    }
-    belt.style.transform = `translateX(-${beltPosition}vw)`;
-}, 20);
-</script>
-
-<script>
-const header = document.querySelector('.image-header');
-const reveal = document.getElementById('header-reveal');
-
-header.addEventListener('mousemove', e => {
-  const rect = header.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100;
-  const y = ((e.clientY - rect.top) / rect.height) * 100;
-  
-  reveal.style.setProperty('--x', x + '%');
-  reveal.style.setProperty('--y', y + '%');
-});
-</script>
-
-
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-</body>
 </html>
