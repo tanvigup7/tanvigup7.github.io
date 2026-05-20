@@ -45,47 +45,164 @@
       margin: 0 auto;
     }
 
-    /* NAV */
+      /* NAV */
 
-    nav {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 999;
-      backdrop-filter: blur(20px);
-      background: rgba(5,5,5,0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+    
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.3rem 0;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    .logo {
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #ffffff;
-    }
+  padding: 18px 28px;
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
+  background: rgba(0, 0, 0, 0.65); /* darker = grounded */
+  backdrop-filter: blur(14px);
 
-    .nav-links a {
-      font-size: 0.9rem;
-      color: #bdbdbd;
-      transition: 0.3s ease;
-    }
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
-    .nav-links a:hover {
-      color: white;
-    }
+  z-index: 10001;
+}
+
+/* LEFT IDENTITY */
+.logo {
+  font-family: monospace;
+  font-size: 16px;
+
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 1px;
+}
+
+.prompt {
+  color: #65ff8f;
+  margin-right: 6px;
+}
+
+/* CENTER STATUS (LISTENING) */
+.status {
+  font-family: monospace;
+  font-size: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  letter-spacing: 1px;
+
+  color: rgba(255, 255, 255, 0.45); /* NOT white */
+}
+
+/* song title slightly brighter */
+.status .track {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* animated system indicator */
+.status .bars {
+  color: #65ff8f;
+  opacity: 0.85;
+
+  animation: barPulse 1.4s infinite;
+}
+
+@keyframes barPulse {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* RIGHT NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-links a {
+  font-family: monospace;
+  font-size: 14px;
+
+  color: rgba(255, 255, 255, 0.4);
+
+  text-decoration: none;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  border: 1px solid transparent;
+
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: rgba(255, 255, 255, 0.9);
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  transform: translateY(-1px);
+}
+
+.listen-widget {
+  position: absolute;
+  top: 120px;
+  right: 40px;
+
+  width: 260px;
+  padding: 16px;
+
+  font-family: monospace;
+  font-size: 13px;
+  color: #eaeaea;
+
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+
+  white-space: pre;
+  line-height: 1.4;
+}
+
+.listen-widget {
+  position: absolute;
+  top: 120px;
+  right: 40px;
+
+  width: 260px;
+
+  font-family: monospace;
+  font-size: 13px;
+  color: #eaeaea;
+
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+
+  padding: 14px;
+
+  white-space: pre;
+  line-height: 1.4;
+}
+
+.spotify-btn {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 8px 12px;
+
+  background: transparent;
+  border: 1px solid #777;
+  color: #aaa;
+
+  cursor: pointer;
+}
+
+.spotify-btn:hover {
+  color: white;
+  border-color: white;
+}
 
     /* HERO */
 
@@ -343,18 +460,26 @@
 
   <!-- NAV -->
 
-  <nav>
-    <div class="container nav-inner">
-      <a href="index.html" class="logo">Tanvi Gupta</a>
+<nav class="top-nav">
+  <div class="logo">
+    <span class="prompt">~</span> <a href="index.html">/tanvi/</a>
+  </div>
 
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="#">Resume</a>
-        <a href="#">Contact</a>
-      </div>
-    </div>
-  </nav>
+  <div class="status">
+    LISTENING_TO:
+    <span class="track">
+      Playboi Carti — Long Time
+    </span>
+    <span class="bars">[██████████░░]</span>
+  </div>
+
+
+  <div class="nav-links">
+    <a href="playground.html">tinker/</a>
+    <a href="projects.html">projects.js</a>
+    <a href="guestbook.html">guestbook.md</a>
+  </div>
+</nav>
 
   <!-- HERO -->
 
