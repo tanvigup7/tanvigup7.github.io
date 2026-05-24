@@ -2,14 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Projects — Tanvi Gupta</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>projects.js</title>
 
   <style>
     * {
@@ -18,439 +12,189 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       background: #050505;
-      color: #f5f5f5;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
+      color: #e5e5e5;
+      font-family: monospace;
+      padding: 120px 40px;
     }
 
-    ::selection {
-      background: white;
-      color: black;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: 92%;
-      max-width: 1500px;
-      margin: 0 auto;
-    }
-
-      /* NAV */
-
-    
-.top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 18px 28px;
-
-  background: rgba(0, 0, 0, 0.65); /* darker = grounded */
-  backdrop-filter: blur(14px);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-
-  z-index: 10001;
-}
-
-/* LEFT IDENTITY */
-.logo {
-  font-family: monospace;
-  font-size: 16px;
-
-  color: rgba(255, 255, 255, 0.75);
-  letter-spacing: 1px;
-}
-
-.prompt {
-  color: #65ff8f;
-  margin-right: 6px;
-}
-
-/* CENTER STATUS (LISTENING) */
-.status {
-  font-family: monospace;
-  font-size: 12px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  letter-spacing: 1px;
-
-  color: rgba(255, 255, 255, 0.45); /* NOT white */
-}
-
-/* song title slightly brighter */
-.status .track {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-/* animated system indicator */
-.status .bars {
-  color: #65ff8f;
-  opacity: 0.85;
-
-  animation: barPulse 1.4s infinite;
-}
-
-@keyframes barPulse {
-  0%   { opacity: 0.4; }
-  50%  { opacity: 1; }
-  100% { opacity: 0.5; }
-}
-
-/* RIGHT NAV LINKS */
-.nav-links {
-  display: flex;
-  gap: 16px;
-}
-
-.nav-links a {
-  font-family: monospace;
-  font-size: 14px;
-
-  color: rgba(255, 255, 255, 0.4);
-
-  text-decoration: none;
-
-  padding: 6px 10px;
-  border-radius: 6px;
-
-  border: 1px solid transparent;
-
-  transition: all 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: rgba(255, 255, 255, 0.9);
-
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  transform: translateY(-1px);
-}
-
-.listen-widget {
-  position: absolute;
-  top: 120px;
-  right: 40px;
-
-  width: 260px;
-  padding: 16px;
-
-  font-family: monospace;
-  font-size: 13px;
-  color: #eaeaea;
-
-  background: rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-
-  white-space: pre;
-  line-height: 1.4;
-}
-
-.listen-widget {
-  position: absolute;
-  top: 120px;
-  right: 40px;
-
-  width: 260px;
-
-  font-family: monospace;
-  font-size: 13px;
-  color: #eaeaea;
-
-  background: rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-
-  padding: 14px;
-
-  white-space: pre;
-  line-height: 1.4;
-}
-
-.spotify-btn {
-  font-family: monospace;
-  font-size: 12px;
-  padding: 8px 12px;
-
-  background: transparent;
-  border: 1px solid #777;
-  color: #aaa;
-
-  cursor: pointer;
-}
-
-.spotify-btn:hover {
-  color: white;
-  border-color: white;
-}
-
-    /* HERO */
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 6rem;
-    }
-
-    .hero-content {
-      width: 100%;
-    }
-
-    .hero-label {
-      color: #8f8f8f;
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-
-    .hero-title {
-      font-size: clamp(4rem, 11vw, 11rem);
-      line-height: 0.9;
-      font-weight: 800;
-      letter-spacing: -0.06em;
-      max-width: 1300px;
-    }
-
-    .hero-subtitle {
-      margin-top: 2rem;
-      max-width: 700px;
-      color: #9d9d9d;
-      font-size: 1.15rem;
-      line-height: 1.7;
-    }
-
-    /* SECTION */
-
-    .section-divider {
-      width: 100%;
-      height: 1px;
-      background: rgba(255,255,255,0.08);
-    }
-
-    /* PROJECTS */
-
-    .projects {
-      padding: 8rem 0;
-    }
-
-    .project {
-      padding: 7rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 4rem;
-      transition: 0.5s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-4px);
-    }
-
-    .project-number {
-      color: #7a7a7a;
-      font-size: 0.9rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .project-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .project-title {
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: -0.05em;
-    }
-
-    .project-description {
-      color: #9a9a9a;
-      line-height: 1.8;
-      font-size: 1.05rem;
-      max-width: 750px;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1rem;
-    }
-
-    .tag {
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 0.6rem 1rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      color: #cfcfcf;
-      letter-spacing: 0.03em;
-    }
-
-    .project-link {
-      margin-top: 1rem;
-      width: fit-content;
-      font-size: 1rem;
-      position: relative;
-      padding-bottom: 0.3rem;
-    }
-
-    .project-link::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
+    /* NAV */
+
+    .top-nav {
+      position: fixed;
+      top: 0;
       left: 0;
-      width: 0%;
-      height: 1px;
-      background: white;
-      transition: 0.4s ease;
-    }
-
-    .project-link:hover::after {
       width: 100%;
-    }
 
-    /* FEATURE BLOCK */
-
-    .feature-block {
-      padding: 10rem 0;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .feature-text h2 {
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      line-height: 0.95;
-      letter-spacing: -0.05em;
-      margin-bottom: 2rem;
-    }
-
-    .feature-text p {
-      color: #9d9d9d;
-      line-height: 1.9;
-      font-size: 1.05rem;
-      max-width: 600px;
-    }
-
-    .feature-visual {
-      height: 500px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,0.05),
-          rgba(255,255,255,0.01)
-        );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #6d6d6d;
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 5rem 0;
-    }
-
-    .footer-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 2rem;
-      color: #7d7d7d;
-      font-size: 0.9rem;
+
+      padding: 26px 40px;
+
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(16px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+
+      z-index: 999;
     }
 
-    /* ANIMATIONS */
-
-    .fade-up {
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 1s forwards;
+    .logo {
+      font-size: 18px;
+      color: white;
     }
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .nav-links {
+      display: flex;
+      gap: 28px;
     }
 
-    /* RESPONSIVE */
-
-    @media (max-width: 1000px) {
-
-      .project {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-title {
-        line-height: 1;
-      }
+    .nav-links a {
+      color: #777;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.2s;
     }
 
-    @media (max-width: 700px) {
+    .nav-links a:hover {
+      color: white;
+    }
 
-      .nav-links {
-        gap: 1rem;
+    /* PAGE */
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .hero {
+      margin-bottom: 80px;
+    }
+
+    .hero h1 {
+      font-size: 86px;
+      color: white;
+      margin-bottom: 18px;
+      line-height: 1;
+    }
+
+    .hero p {
+      color: #777;
+      max-width: 700px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* GRID */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 26px;
+    }
+
+    .card {
+      position: relative;
+
+      background: linear-gradient(145deg, #111, #0a0a0a);
+      border: 1px solid rgba(255,255,255,0.08);
+
+      border-radius: 18px;
+
+      padding: 28px;
+
+      transition: 0.3s ease;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -80px;
+
+      width: 180px;
+      height: 180px;
+
+      background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%);
+    }
+
+    .title {
+      font-size: 22px;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .desc {
+      color: #a0a0a0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #888;
+
+      background: rgba(255,255,255,0.03);
+    }
+
+    .link {
+      margin-top: 16px;
+      display: inline-block;
+      color: #aaa;
+      font-size: 13px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .link:hover {
+      color: white;
+    }
+
+    /* ASCII corner */
+
+    .ascii {
+      position: absolute;
+      bottom: 14px;
+      right: 16px;
+
+      font-size: 11px;
+      color: rgba(255,255,255,0.04);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        padding: 110px 18px;
       }
 
-      .hero {
-        min-height: 80vh;
-      }
-
-      .hero-subtitle {
-        font-size: 1rem;
-      }
-
-      .feature-visual {
-        height: 320px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
+      .hero h1 {
+        font-size: 52px;
       }
     }
   </style>
@@ -460,248 +204,93 @@
 
   <!-- NAV -->
 
-<nav class="top-nav">
-  <div class="logo">
-    <span class="prompt">~</span> <a href="index.html">/tanvi/</a>
-  </div>
+  <nav class="top-nav">
+    <div class="logo">~/tanvi/projects.js</div>
 
-  <div class="status">
-    LISTENING_TO:
-    <span class="track">
-      Playboi Carti — Long Time
-    </span>
-    <span class="bars">[██████████░░]</span>
-  </div>
-
-
-  <div class="nav-links">
-    <a href="playground.html">tinker/</a>
-    <a href="projects.html">projects.js</a>
-    <a href="guestbook.html">guestbook.md</a>
-  </div>
-</nav>
-
-  <!-- HERO -->
-
-  <section class="hero">
-    <div class="container hero-content fade-up">
-
-      <div class="hero-label">
-        Selected Work
-      </div>
-
-      <h1 class="hero-title">
-        Creative engineering for intelligent systems.
-      </h1>
-
-      <p class="hero-subtitle">
-        Exploring machine learning, robotics, computer vision,
-        systems design, and experimental software experiences
-        through ambitious technical projects.
-      </p>
-
+    <div class="nav-links">
+      <a href="index.html">home</a>
+      <a href="experience.html">experience</a>
+      <a href="guestbook.html">guestbook.md</a>
     </div>
-  </section>
+  </nav>
 
-  <div class="section-divider"></div>
+  <!-- CONTENT -->
 
-  <!-- PROJECTS -->
+  <div class="container">
 
-  <section class="projects">
-    <div class="container">
+    <section class="hero">
+      <h1>projects/</h1>
+      <p>
+        systems, experiments, AI tools, creative interfaces, and random things
+        that probably shouldn’t work but do anyway.
+      </p>
+    </section>
+
+    <section class="grid">
 
       <!-- PROJECT 1 -->
+      <div class="card">
+        <div class="title">Surgical Path Planning AI</div>
+        <div class="subtitle">U-Net + robotics simulation</div>
 
-      <div class="project fade-up">
-
-        <div class="project-number">
-          Project 01
+        <div class="desc">
+          Built an early-stage system for surgical trajectory planning using segmentation
+          models and geometric optimization for constrained anatomical environments.
         </div>
 
-        <div class="project-content">
-
-          <h2 class="project-title">
-            Surgical Path Planning System
-          </h2>
-
-          <p class="project-description">
-            AI-assisted robotic surgery planning pipeline integrating
-            segmentation models, trajectory generation, and 3D anatomical
-            analysis for minimally invasive procedures.
-          </p>
-
-          <div class="project-tags">
-            <div class="tag">PyTorch</div>
-            <div class="tag">Computer Vision</div>
-            <div class="tag">Medical AI</div>
-            <div class="tag">U-Net</div>
-          </div>
-
-          <a href="#" class="project-link">
-            View Project →
-          </a>
-
+        <div class="tags">
+          <div class="tag">pytorch</div>
+          <div class="tag">medical AI</div>
+          <div class="tag">computer vision</div>
         </div>
+
+        <a class="link" href="#">view repo →</a>
+        <div class="ascii">[ACTIVE]</div>
       </div>
 
       <!-- PROJECT 2 -->
+      <div class="card">
+        <div class="title">Spotify Listening Terminal</div>
+        <div class="subtitle">real-time API widget</div>
 
-      <div class="project fade-up">
-
-        <div class="project-number">
-          Project 02
+        <div class="desc">
+          Live “now playing” system that renders ASCII-style progress bars and
+          updates via Spotify Web API authentication flow.
         </div>
 
-        <div class="project-content">
-
-          <h2 class="project-title">
-            Bayesian State Estimator
-          </h2>
-
-          <p class="project-description">
-            Probabilistic state estimation framework for dynamic systems
-            using Bayesian inference techniques and uncertainty modeling
-            for autonomous robotics environments.
-          </p>
-
-          <div class="project-tags">
-            <div class="tag">Python</div>
-            <div class="tag">Robotics</div>
-            <div class="tag">Probability</div>
-            <div class="tag">Algorithms</div>
-          </div>
-
-          <a href="#" class="project-link">
-            View Project →
-          </a>
-
+        <div class="tags">
+          <div class="tag">javascript</div>
+          <div class="tag">api</div>
+          <div class="tag">frontend systems</div>
         </div>
+
+        <a class="link" href="#">live demo →</a>
+        <div class="ascii">[STREAMING]</div>
       </div>
 
       <!-- PROJECT 3 -->
+      <div class="card">
+        <div class="title">Creative Portfolio Engine</div>
+        <div class="subtitle">this website</div>
 
-      <div class="project fade-up">
-
-        <div class="project-number">
-          Project 03
+        <div class="desc">
+          Fully custom interactive portfolio with physics-inspired UI,
+          glitch aesthetics, and layered visual storytelling.
         </div>
 
-        <div class="project-content">
-
-          <h2 class="project-title">
-            Sports Analytics Engine
-          </h2>
-
-          <p class="project-description">
-            Data-driven sports intelligence platform analyzing player
-            performance, predictive metrics, and game trends using
-            machine learning workflows and exploratory visualization.
-          </p>
-
-          <div class="project-tags">
-            <div class="tag">Pandas</div>
-            <div class="tag">Machine Learning</div>
-            <div class="tag">Analytics</div>
-            <div class="tag">Data Visualization</div>
-          </div>
-
-          <a href="#" class="project-link">
-            View Project →
-          </a>
-
+        <div class="tags">
+          <div class="tag">html/css/js</div>
+          <div class="tag">ui/ux</div>
+          <div class="tag">creative coding</div>
         </div>
+
+        <a class="link" href="#">source →</a>
+        <div class="ascii">[RUNNING]</div>
       </div>
 
-      <!-- PROJECT 4 -->
+    </section>
 
-      <div class="project fade-up">
-
-        <div class="project-number">
-          Project 04
-        </div>
-
-        <div class="project-content">
-
-          <h2 class="project-title">
-            Creative Music Technology Lab
-          </h2>
-
-          <p class="project-description">
-            Experimental software tools exploring the intersection
-            of sound, interaction, generative systems, and digital
-            creative experiences.
-          </p>
-
-          <div class="project-tags">
-            <div class="tag">Creative Coding</div>
-            <div class="tag">Audio</div>
-            <div class="tag">Interactive Systems</div>
-            <div class="tag">JavaScript</div>
-          </div>
-
-          <a href="#" class="project-link">
-            View Project →
-          </a>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- FEATURE BLOCK -->
-
-  <section class="feature-block">
-
-    <div class="container">
-
-      <div class="feature-grid">
-
-        <div class="feature-text">
-
-          <h2>
-            Building systems that feel cinematic.
-          </h2>
-
-          <p>
-            I’m interested in ambitious software experiences —
-            from medical AI and robotics to computational systems,
-            aerospace-inspired engineering, and experimental interfaces.
-            My work combines technical depth with strong visual
-            presentation and storytelling.
-          </p>
-
-        </div>
-
-        <div class="feature-visual">
-          Future Project Visual
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div class="container footer-content">
-
-      <div>
-        © 2026 Tanvi Gupta
-      </div>
-
-      <div>
-        Computer Science · AI · Creative Engineering
-      </div>
-
-    </div>
-
-  </footer>
+  </div>
 
 </body>
 </html>

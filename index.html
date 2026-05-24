@@ -8,9 +8,9 @@
   </div>
 
   <div class="status">
-    LISTENING_TO:
+    SYSTEM_STATUS:
     <span class="track">
-      Playboi Carti — Long Time
+      STABLE
     </span>
     <span class="bars">[██████████░░]</span>
   </div>
@@ -18,7 +18,7 @@
 
   <div class="nav-links">
     <a href="playground.html">tinker/</a>
-    <a href="projects.html">projects.js</a>
+    <a href="projects.html">work.js</a>
     <a href="guestbook.html">guestbook.md</a>
   </div>
 </nav>
@@ -30,7 +30,7 @@
 
   <!-- terminal overlay -->
   <div class="terminal-window">
-
+    <canvas id="terminal-glow"></canvas>
     <div class="terminal-topbar">
       <div class="dots">
         <span></span>
@@ -116,6 +116,34 @@
     </text>
   </svg>
 </div>
+
+<script>
+const arc = document.querySelector(".arched-text-container");
+
+document.addEventListener("mousemove", (e) => {
+  const rect = arc.getBoundingClientRect();
+
+  const arcX = rect.left + rect.width / 2;
+  const arcY = rect.top + rect.height / 2;
+
+  const dx = e.clientX - arcX;
+  const dy = e.clientY - arcY;
+
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  if (distance < 250) {
+    arc.style.transform = `
+      translateX(-50%)
+      translate(${dx * 0.02}px, ${dy * 0.02}px)
+      scale(1.04)
+    `;
+  } else {
+    arc.style.transform = "translateX(-50%)";
+  }
+});
+</script>
+
+
 </header>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
