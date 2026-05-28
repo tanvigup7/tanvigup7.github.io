@@ -3,142 +3,202 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KD Essay — Tanvi Gupta</title>
+  <title>Kevin Durant & Inevitability</title>
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      background: #050505;
+      color: #f5f5f5;
+      font-family: Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    /* subtle animated grain */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      animation: grainMove 8s linear infinite;
+      z-index: 1;
+    }
 
-  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    @keyframes grainMove {
+      0% { transform: translate(0,0); }
+      50% { transform: translate(-1%, 1%); }
+      100% { transform: translate(0,0); }
+    }
+
+    .back-button {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 100;
+      text-decoration: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+
+    .back-button:hover {
+      opacity: 0.4;
+    }
+
+    .article-container {
+      position: relative;
+      z-index: 2;
+      width: min(720px, 90vw);
+      margin: 0 auto;
+      padding: 10rem 0 8rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      opacity: 0.4;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      font-weight: 500;
+      margin-bottom: 2rem;
+
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1.2s ease forwards;
+      animation-delay: 0.1s;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      line-height: 1.7;
+      opacity: 0.65;
+      margin-bottom: 5rem;
+      max-width: 600px;
+
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1.2s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    article p {
+      font-size: 1.08rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 2rem;
+
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all 0.8s ease;
+    }
+
+    article p.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    article p em {
+      opacity: 0.7;
+    }
+
+    /* subtle hover readability boost */
+    article p:hover {
+      color: rgba(255,255,255,1);
+    }
+
+    @media (max-width: 768px) {
+      .back-button {
+        top: 1.5rem;
+        left: 1.5rem;
+      }
+    }
+  </style>
 </head>
 
-<body class="essay-page">
+<body>
 
-  <!-- NAV -->
- <nav class="top-nav">
-  <div class="logo">
-    <span class="prompt">~</span> <a href="index.html">/tanvi/</a>
-  </div>
+  <div class="grain"></div>
 
-  <div class="status">
-    LISTENING_TO:
-    <span class="track">
-      Playboi Carti — Long Time
-    </span>
-    <span class="bars">[██████████░░]</span>
-  </div>
+  <a class="back-button" href="playground.html#writing">← back</a>
 
+  <main class="article-container">
 
-  <div class="nav-links">
-    <a href="playground.html">tinker/</a>
-    <a href="projects.html">projects.js</a>
-    <a href="guestbook.html">guestbook.md</a>
-  </div>
-</nav>
+    <div class="tag">essay</div>
 
+    <h1>kevin durant & inevitability</h1>
 
-  <!-- HERO -->
-  <section class="essay-hero">
+    <p class="subtitle">
+      notes on dominance, rhythm, and the strange calmness of watching someone who already knows the shot is going in.
+    </p>
 
-    <img
-      src="Images/kd.jpg"
-      alt="Kevin Durant"
-      class="essay-bg"
-    />
+    <article>
 
-    <div class="essay-overlay"></div>
-
-    <div class="essay-header">
-
-
-      <h1>
-        Kevin Durant<br>
-        and the collapse<br>
-        of the Warriors dynasty
-      </h1>
-
-      <p class="essay-meta">
-        written by tanvi gupta —
-        february 2026
-      </p>
-
-    </div>
-
-  </section>
-
-  <!-- ARTICLE -->
-  <main class="essay-container">
-
-    <div class="essay-line"></div>
-
-    <article class="essay-content">
-
-      <p class="essay-intro">
-        People call it weak. I call it strategic ruthlessness.
-      </p>
+      <p>People call it weak. I call it strategic ruthlessness.</p>
 
       <p>
         This isn’t really a story about loyalty, betrayal, or even basketball.
         It’s a story about systems, ruthlessness, and adaptation.
-        In the film, The Devil Wears Prada, Andy Sachs can’t beat Miranda Priestly.
-        So she immerses herself in entering the machine: learning its rules, absorbing its pressure, and eventually becoming part of  it.
-        In the NBA, Kevin Durant did the same when he joined the Golden State Warriors dynasty.
+        In The Devil Wears Prada, Andy Sachs doesn’t beat Miranda Priestly — she enters the system.
+        Kevin Durant did the same when he joined the Warriors.
       </p>
 
       <p>
-        In 2016, after blowing a 3–1 lead to the Golden State Warriors,
-        KD made the most controversial decision of his career and shocked the sports world.
+        After blowing a 3–1 lead in 2016, KD made the most controversial decision of his career.
         He left OKC and Russell Westbrook to join the very system that had defeated him.
-        The public reaction was immediate and nuclear: snake, ring chaser, coward, betrayal.
-        Fans framed it as abandonment. Analysts framed it as weakness.
-        But within the framework of system mastery, of Andy entering Miranda’s world, it made perfect sense.
+        The reaction was immediate: snake, coward, ring-chaser.
+        But from a systems perspective, it was optimization.
       </p>
 
       <p>
         I don’t admire KD for taking the easy path.
         I admire that he chose leverage over ego.
-        Instead of romanticizing the idea of beating the unbeatable, he recognized the superior system and positioned himself inside it.
-        Most athletes are conditioned to believe in the uphill climb: loyalty, rivalry, “we’ll get them next year.”
-        Pride is currency in the sports world. Durant chose optimization over pride. Cowardice is fear driven.
-        KD’s move was calculus driven.
+        Instead of romanticizing an uphill war, he stepped into inevitability.
       </p>
 
       <p>
-        The Warriors weren’t just good. They were a flawless dynasty.
-        Miranda Priestly. Not a person. A system of casual destruction.
-        Not loud, not chaotic, just inevitable. Miranda doesn’t ever raise her voice, she simply says, “That’s all.”
-        And the entire room rearranges itself. One of her most infamous lines, “Everybody wants to be us”defined the Warriors from 2015 to 2019. They didn’t just beat teams, they demoralized them. A 73-9 season. Three championships in four years. Third quarters that felt like avalanches. Strength in Numbers. Smile, shrug, splash, goodnight. 
+        The Warriors weren’t just good — they were a system of controlled destruction.
+        Not loud. Not chaotic. Just inevitable.
+        “Strength in Numbers” wasn’t a slogan. It was physics.
       </p>
 
       <p>
-        It wasn’t loud villainy. It was effortless destruction.
+        It wasn’t villainy. It was efficiency disguised as art.
       </p>
 
       <p>
-        And through it all, Draymond Green served as the constant internal pressure.
-        The voice yelling at you from every direction, a constant reminder that greatness wasn’t comfortable.
-        He embodied the brutal honesty captured in one of the film’s sharpest lines:
-        “Yes, because that's really what this whole multibillion-dollar industry is all about, isn't it? Inner beauty.”
-        Both of which eventually lead to Andy’s and Durant’s departure from the system.
+        Westbrook represents the opposite axis: loyalty, emotional gravity, resistance to exit.
+        Incredible talent, suboptimal structure.
+        Sometimes greatness trapped in the wrong system still looks like failure.
       </p>
 
       <p>
-        Contrast that with Westbrook’s arc. Loyalty. Emotional devotion. Eleven seasons with OKC.
-        He, like Emily in the film, bled for the system. Talented and driven.
-        So close to Paris, just 1 stomach flu away. Yet still no ring. Not because of a lack of greatness.
-        Emily wasn’t untalented, and neither is Westbrook. But sometimes greatness inside a suboptimal structure just isn’t enough. 
-      </p>
-
-      <p>
-        And the moment Andy enters Paris?
-        That’s 2017 when KD wins with the Warriors.
-        The quiet, ice cold performance.The Finals MVP.The world was booing, yet all eyes were on him.
-      </p>
-
-      <p>
-       The moral tension at the center of this debate is simple but sharp:
-       Is it better to be loved and struggling, or powerful and resented?
+        The moral tension is simple:
+        is it better to be loved while struggling, or resented while winning?
       </p>
 
       <p>
@@ -146,30 +206,39 @@
       </p>
 
       <p>
-        People call it weak because it violates the romantic sports narrative.
-        Heroes are supposed to conquer the empire, not join it.
-        But history has repeatedly shown itself to often reward those who recognize superior systems
-        and align themselves strategically rather than fighting uphill battles for pride.
+        People call it weak because it breaks the sports mythology —
+        the idea that heroes must always climb, never step sideways into certainty.
       </p>
 
       <p>
-        Was there a cost? Absolutely. Both Durant and Andy lost something when they entered those worlds.
-        Public love becomes complicated when success looks inevitable.
+        But systems don’t care about narrative.
+        They only care about outcomes.
       </p>
 
       <p>
-        And that is why I don’t see weakness. I see strategic ruthlessness.
-        Whether we admit it or not, there is something compelling about someone willing to embrace inevitability over applause.
+        And that’s why it feels inevitable.
       </p>
-
-
-      <div class="essay-end">
-        END_TRANSMISSION
-      </div>
 
     </article>
 
   </main>
+
+  <script>
+    // scroll reveal for paragraphs
+    const paragraphs = document.querySelectorAll("article p");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    paragraphs.forEach(p => observer.observe(p));
+  </script>
 
 </body>
 </html>
