@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>under_construction.md</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050505;
+    color: #fff;
+    font-family: monospace;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2rem;
+}
+
+.container {
+    width: min(90vw, 500px);
+
+    background: rgba(10,10,10,.85);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.6);
+}
+
+.topbar {
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+}
+
+.dots {
+    position: absolute;
+    left: 15px;
+
+    display: flex;
+    gap: 6px;
+}
+
+.dots div {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #444;
+}
+
+.filename {
+    color: #666;
+}
+
+.content {
+    padding: 2rem;
+}
+
+.title {
+    color: #65ff8f;
+    margin-bottom: 1rem;
+}
+
+.message {
+    color: #999;
+    line-height: 1.8;
+}
+
+.cursor {
+    animation: blink .8s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="topbar">
+        <div class="dots">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="filename">
+            under_construction.md
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="title">
+            under_construction.md
+        </div>
+
+        <div class="message">
+            still building.
+            <br><br>
+            come back later 
+            <span class="cursor">_</span>
+            <br><br>
+            <a href="index.html">home</a>
+            
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

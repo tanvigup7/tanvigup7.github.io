@@ -191,7 +191,20 @@
   border-color: white;
 }
 
+.bg-video {
+  position: fixed;
+  top: 80px;
+  right: 0;
 
+    width: clamp(250px, 60vw, 1000px);
+
+  height: auto;
+
+  pointer-events: none;
+  z-index: -1;
+
+  object-fit: contain;
+}
 
     /* PAGE */
 
@@ -584,4 +597,8 @@
   </section>
 
 </body>
+
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="Images/blackHole.mp4" type="video/mp4">
+</video>
 </html>
