@@ -1,10 +1,518 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Art</title>
-  <link rel="stylesheet" href="CSS/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>gallery.exe</title>
+
+<style>
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+    body{
+      background:#050505;
+      color:white;
+      font-family: monospace;
+      overflow-x:hidden;
+    }
+ 
+
+/* =====================
+          NAV
+===================== */
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 28px;
+
+  background: rgba(0, 0, 0, 0.65); /* darker = grounded */
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  z-index: 10001;
+}
+
+/* LEFT IDENTITY */
+.logo {
+ display: flex
+}
+
+.logo a { 
+  font-family: monospace;
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.prompt {
+  color: #65ff8f;
+  margin-right: 6px;
+}
+
+/* RIGHT NAV LINKS */
+
+/* NAV ITEM WRAPPER */
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+
+/* SOCIAL ICONS */
+
+.social-icons {
+
+  display: flex;
+  align-items: center;
+  gap: clamp(0.4rem, 1vw, 0.9rem);
+}
+
+
+.social-icons a {
+
+  color:
+    rgba(255,255,255,0.42);
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+.social-icons a:hover {
+
+  color: white;
+
+  transform:
+    translateY(-2px)
+    scale(1.08);
+}
+
+
+/* ICON SIZE */
+
+.social-icons svg {
+
+  width: 17px;
+  height: 17px;
+
+  display: block;
+}
+
+.social-icons a:last-child svg {
+  top: -3px;
+  position: relative;
+}
+/* DROPDOWN BOX */
+
+.dropdown {
+  position: absolute;
+
+  top: 120%;
+  left: 0;
+
+  min-width: 160px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px;
+
+  gap: 8px;
+
+  background: rgba(10,10,10,0.9);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+
+  border-radius: 10px;
+
+  opacity: 0;
+  transform: translateY(-8px);
+
+  pointer-events: none;
+
+  transition: all 0.2s ease;
+
+  z-index: 9999;
+}
+
+/* SHOW ON HOVER */
+
+.nav-item:hover .dropdown {
+  opacity: 1;
+  transform: translateY(0);
+
+  pointer-events: auto;
+}
+
+/* DROPDOWN LINKS */
+
+.dropdown a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+
+  text-decoration: none;
+
+  transition: 0.2s ease;
+}
+
+.dropdown a:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+
+.nav-links {
+  display: flex;
+  gap: clamp(0.4rem, 1.2vw, 1rem);
+}
+
+.nav-links a {
+  font-family: monospace;
+  font-size: clamp(0.7rem, 0.9vw, 0.9rem);
+  color: rgba(255, 255, 255, 0.4);
+
+  text-decoration: none;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  border: 1px solid transparent;
+
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: rgba(255, 255, 255, 0.9);
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  transform: translateY(-1px);
+}
+
+/* ===== CAROUSEL ===== */
+
+.gallery-section {
+  position: relative;
+  padding: 70px 0;
+  background:#000;
+  overflow:hidden;
+}
+
+/* horizontal cinematic scroll */
+.gallery {
+width:45%;
+  margin-left:30px;
+  display: flex;
+  gap: 30px;
+  padding: 0 10vw;
+  overflow-x: scroll; /* Changed to scroll to ensure interaction */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.gallery:active {
+  cursor: grabbing;
+}
+
+.gallery-art {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: auto;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.slide {
+    cursor:pointer;
+  flex:0 0 auto;
+  scroll-snap-align:center;
+  margin:0;
+  z-index:2;
+}
+
+.slide img {
+  width: 200px;
+  height: auto;
+  object-fit: contain; /* Keeps them as perfect squares */
+  transition: transform 0.3s ease, filter 0.3s;
+}
+
+.slide:hover img {
+  border: 4px solid #65ff8f;;
+}
+
+/* hide scrollbar */
+.gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.bg-video {
+    top: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    pointer-events: none;
+}
+
+.dj {
+     width: 100%;
+}
+.video-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.phone {
+  position: absolute;
+  /* PINNING: Adjust these % to place the phone on a specific spot in your art */
+  top: 73%;
+  left: 42%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  width: 22%;
+    aspect-ratio: 340 / 180;
+  border-radius: 10px; /* Rounded for the phone look */
+  padding: 18px;
+  background: #1a1a1a; /* Darker, more industrial phone frame */
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.screen {
+  overflow-y: auto;
+  flex: 1;
+  scroll-behavior: smooth;
+}
+
+.soundcloud {
+    position: absolute;
+
+    /* same anchor system as phone */
+    top: 90%;
+    left: 42%;
+
+      transform: translate(-50%, -50%) rotate(15deg);
+
+    width: 22%;       /* matches phone width */
+    aspect-ratio: 4 / 1;
+
+    z-index: 10;
+
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.soundcloud iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.track {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 0;
+  border-radius: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.track:hover {
+  transform: translateX(6px);
+}
+
+
+.track .cover {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+
+  /* The Image Logic */
+  background-image: url('Images/purple.JPEG');
+  background-size: cover;      /* Makes sure the photo fills the square */
+  background-position: center; /* Centers the crop */
+  background-repeat: no-repeat;
+  
+  /* Fallback color if image is missing */
+  background-color: #424040; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.track h3 {
+  margin: 0;
+  font-size: clamp(0.4rem, 0.8vw, 0.9rem);
+  font-weight: 500;
+  color: #b3b4b6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track p {
+  margin: 2px 0 0;
+  font-size: clamp(0.3rem, 0.6vw, 0.7rem);
+  color: #b3b4b6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dj-control-panel {
+  position: absolute;
+  bottom: 50%;
+  left: 3%;
+  width: 32%;
+    height: 25%;  
+  background: #11111100; 
+  border: 0px solid #333;
+  border-radius: 2px;
+  padding: 1%;
+  overflow-y: auto;  /* This creates the scroll */
+  z-index: 10;
+  
+  /* Styling the scrollbar to look industrial */
+  scrollbar-width: thin;
+  scrollbar-color: #297b5d #111;
+}
+
+.track-list {
+display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3%;
+}
+
+.track-square {
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.2s;
+  position: relative;
+  z-index: 1;
+  aspect-ratio:1;
+  width:100%;
+  background: rgba(0,0,0,0.6); /* semi-transparent background for readability */
+  color: #fff;
+  text-align: center;
+  padding: 2px 4px;    /* small padding inside overlay */
+  font-size: clamp(0.35rem, 0.7vw, 0.8rem);
+  line-height: 1rem;
+}
+
+.track-square:hover {
+  transform:
+    translateY(-2px)
+    scale(1.05);
+  border-color: #fff;
+  border: 2px solid #fff;
+}
+
+#record-target {
+    position: absolute;
+    top: 74%;
+    left: 13%;
+    width: 6%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 20;
+}
+
+.track-square.docked {
+    position:absolute;
+    width:120%;
+    height:120%;
+    border-radius:50%;
+    overflow:hidden;
+    background:#111;
+    animation:
+    spinRecord 2s linear infinite;
+}
+
+.track-square.docked {
+    color:transparent;
+}
+
+.track-square.docked::before {
+    content:"";
+    position:absolute;
+    inset:10%;
+    border-radius:50%;
+    background:
+    repeating-radial-gradient(
+        circle,
+        rgba(255,255,255,.15) 0px,
+        rgba(255,255,255,.15) 5px,
+        transparent 3px,
+        transparent 6px
+    );
+}
+
+.track-square.docked::after {
+    content:"";
+    position:absolute;
+    width:22%;
+    aspect-ratio:1;
+    top:50%;
+    left:50%;
+    transform:
+    translate(-50%,-50%);
+    border-radius:50%;
+    background:#9d0e06;
+}
+
+@keyframes spinRecord {
+    from {
+        rotate:0deg;
+    }
+    to {
+        rotate:360deg;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-art {
+        display: none;
+    }
+}
+</style>
+
 </head>
-<body>
 
 <!-- NAV -->
 
@@ -18,12 +526,11 @@
   <div class="nav-links">
 
     <div class="nav-item">
-      <a href="construction.html">tinker/</a>
+      <a href="playground.html">tinker/</a>
 
       <div class="dropdown">
-        <a href="construction.html#gallery">art.py</a>
-        <a href="construction.html#writing">write.py</a>
-        <a href="construction.html#music">music.py</a>
+        <a href="playground.html#gallery">art.py</a>
+        <a href="playground.html#music">music.py</a>
       </div>
     </div>
 
@@ -32,8 +539,8 @@
       <a href="experiences.html">work/</a>
 
       <div class="dropdown">
-        <a href="experiences.html">experiences.py</a>
-        <a href="experiences.html">projects.py</a>
+        <a href="experiences.html#experiences">experiences.py</a>
+        <a href="experiences.html#projects">projects.py</a>
       </div>
     </div>
 
@@ -77,315 +584,197 @@
 
 
 </nav>
-<section class="gallery-section">
-
-  <div class="gallery-header">
-    <span class="gallery-tag">ARCHIVE_001</span>
-
-    <h2>
-      artwork + visual experiments
-    </h2>
-
-    <p>
-      posters, album concepts, photography,
-      digital sketches, and random obsessions.
-    </p>
-  </div>
-
-  <img src="Images/dieLitChain.PNG" class="chain">
-  <img src="Images/dieLitFella.PNG" class="fella">
-
-  <div class="gallery-grid">
-
-    <div class="gallery-item tall">
-      <img src="Art/kitties.jpg">
-    </div>
-
-    <div class="gallery-item">
-      <img src="Art/crayonLady.jpg">
-    </div>
-
-    <div class="gallery-item wide">
-      <img src="Images/interstellar1.jpg">
-    </div>
-
-    <div class="gallery-item">
-      <img src="Images/kenCarson.jpg">
-    </div>
-
-    <div class="gallery-item tall">
-      <img src="Images/WASTELAND.jpg">
-    </div>
-
-    <div class="gallery-item">
-      <img src="Images/asap.jpg">
-    </div>
-
-    <div class="gallery-item wide">
-      <img src="Images/London.jpg">
-    </div>
-
-    <div class="gallery-item">
-      <img src="Images/carti.jpg">
-    </div>
-
-    <div class="gallery-item">
-      <img src="Images/flowers.jpg">
-    </div>
-
-  </div>
-
-</section>
 
 
+
+<body>
 
 <section class="gallery-section" id="gallery">
-      <div class="spacer" style="flex: 0 0 500vw; height: 1px;"></div>
-    <img src="Images/dieLitChain.PNG" alt="Chain Art" class="top-decoration chain">
-  <img src="Images/dieLitFella.PNG" alt="Fella Art" class="top-decoration fella">
-
+        <img
+        src="Images/MUSIK2.PNG"
+        class="gallery-art"
+        alt=""
+    >
    <div class="gallery" id="gallery">
 
     <figure class="slide">
       <img loading="lazy" src="Art/kitties.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
 
     <figure class="slide">
       <img loading="lazy" src="Art/crayonLady.jpg" />
-      <figcaption> </figcaption>
     </figure>
     
         <figure class="slide">
       <img loading="lazy" src="Images/interstellar1.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/kenCarson.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
   <figure class="slide">
       <img loading="lazy" src="Images/InterstellarDon.jpeg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/CivilWar.jpeg" />
-      <figcaption> </figcaption>
     </figure>
+
       <figure class="slide">
       <img loading="lazy" src="Images/Yeezus.jpeg" />
-      <figcaption> </figcaption>
     </figure>
+
       <figure class="slide">
       <img loading="lazy" src="Images/Kankan.jpeg" />
-      <figcaption> </figcaption>
     </figure>
-      </figure>
+
+     
       <figure class="slide">
       <img loading="lazy" src="Images/TLOP5.jpg" />
-      <figcaption> </figcaption>
     </figure>
+
       <figure class="slide">
       <img loading="lazy" src="Images/Yeezus.jpeg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Art/SpiderGirl.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/WASTELAND.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
 
     <figure class="slide">
       <img loading="lazy" src="Images/cards.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/faygo.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
         <figure class="slide">
       <img loading="lazy" src="Images/jb2.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/interstellar2.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
 
     <figure class="slide">
       <img loading="lazy" src="Images/LALALand.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/lovesick.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/Astro2.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/Looney.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
         <figure class="slide">
       <img loading="lazy" src="Images/interstellar3.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/amusement3.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
         <figure class="slide">
       <img loading="lazy" src="Images/asap.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
 
     <figure class="slide">
       <img loading="lazy" src="Images/House.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
       <figure class="slide">
       <img loading="lazy" src="Images/GeminiRights.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
        <figure class="slide">
       <img loading="lazy" src="Images/birdsTheTrap.jpeg" />
-      <figcaption> </figcaption>
     </figure>
 
 
     <figure class="slide">
       <img loading="lazy" src="Images/JOKER.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Art/Peach.jpg" />
-      <figcaption> </figcaption>
     </figure>
+
      <figure class="slide">
       <img loading="lazy" src="Images/Astro.jpg" />
-      <figcaption> </figcaption>
     </figure>
+
   <figure class="slide">
       <img loading="lazy" src="Images/dieLitSkel.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/Lucki.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
     <figure class="slide">
       <img loading="lazy" src="Images/WLR.jpg" />
-      <figcaption> </figcaption>
     </figure>
-        <figure class="slide">
+
+    <figure class="slide">
       <img loading="lazy" src="Images/PierreRoom.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
-      <figure class="slide">
+    <figure class="slide">
       <img loading="lazy" src="Images/Amusement1.jpg" />
-      <figcaption> </figcaption>
     </figure>
-        <figure class="slide">
+
+    <figure class="slide">
       <img loading="lazy" src="Images/dontBeDumb.jpeg" />
-      <figcaption> </figcaption>
     </figure>
-         <figure class="slide">
+
+   <figure class="slide">
       <img loading="lazy" src="Images/Amusement2.jpeg" />
-      <figcaption> </figcaption>
     </figure>
 
-      <figure class="slide">
+    <figure class="slide">
       <img loading="lazy" src="Images/London.jpg" />
-      <figcaption> </figcaption>
     </figure>
-
 
     <figure class="slide">
       <img loading="lazy" src="Images/carti.jpg" />
-      <figcaption> </figcaption>
     </figure>
     
     <figure class="slide">
       <img loading="lazy" src="Images/flowers.jpg" />
-      <figcaption> </figcaption>
     </figure>
 
-<div class="spacer" style="flex: 0 0 50vw; height: 1px;"></div>
   </div>
-<section class="writing-hero" id="writing">
+</section>  
 
-  <div class="writing-overlay"></div>
+<section class="dj" id="music">
 
-<div class="writing-header">
-  <h1>writing + fragments</h1>
+    <div class="video-wrapper">
 
-  <p class="writing-note">
-    word vomit essays, poems, and other evidence that i took one creative poetry elective.
-  </p>
-</div>
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="Images/kankan.mov">
+        </video>
 
-  <div class="writing-grid">
-
-    <a class="writing-card" href="kd.html">
-      <div class="tag">essay</div>
-      <h2>kevin durant & inevitability</h2>
-      <p>notes on dominance, flow states, and basketball aesthetics</p>
-    </a>
-
-    <a class="writing-card" href="thwack.html">
-      <div class="tag">poem</div>
-      <h2>thwack</h2>
-      <p>a poem embodying the music of tennis</p>
-    </a>
-
-        <a class="writing-card" href="away.html">
-      <div class="tag">poem</div>
-      <h2>away</h2>
-      <p>a poem about time</p>
-    </a>
-  </div>
-
-</section>
-
- <!-- MUSIC / PHONE MOCKUP -->
-
-  <section class="music-section" id="music">
-
-    <div class="music-image">
-      <h2>my beat remakes and remixes</h2>
-     
-      <div class="phone" id="phone-player">
-    <div class="screen">
-
+        <div id="record-target"></div>
+        <audio id="dj-audio"></audio>
+        <div class="phone">
+            <div class="screen">
+                
             <div class="track" data-track="Sample Beats/NokiaKaytranada.mp3">
         <div class="cover"></div>
         <div>
@@ -473,83 +862,25 @@
           <p>The Weeknd</p>
         </div>
       </div>
-
-
-
     </div>
-  </div>
-    </div>
-    <!-- HERO -->
+        </div>
 
-  <!-- Mini Audio Player -->
-  <audio id="audio-player" preload="metadata"></audio>
-</section>
+        <div class="soundcloud">
+      <iframe width="100%"
+      height="400" scrolling="no"
+      frameborder="no" allow="autoplay;
+      encrypted-media"
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2327417282&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+    </iframe><div style="font-size: 10px;
+    color: #cccccc;
+    line-break: anywhere;
+    word-break: normal;
+    overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/yktzvv" title="yktzvv" target="_blank" style="color: #cccccc; text-decoration: none;">yktzvv</a> · <a href="https://soundcloud.com/yktzvv/first-mix" title="first mix" target="_blank" style="color: #cccccc; text-decoration: none;">first mix</a></div>
+</div>
 
-<script>
-const audio = document.getElementById("audio-player");
-const tracks = document.querySelectorAll(".track");
 
-tracks.forEach(track => {
-  track.addEventListener("click", () => {
-    // Remove active from other tracks
-    tracks.forEach(t => t.classList.remove("active"));
-    track.classList.add("active");
-
-    // Load audio
-    const src = track.getAttribute("data-track");
-    audio.src = src;
-    audio.play();
-  });
-});
-</script>
-
-<section class="imogen-section">
-
-  <div class="imogen-glow"></div>
-
-  <div class="imogen-content">
-
-    <span class="imogen-tag">
-      computer vision / music technology
-    </span>
-
-    <h2>
-      gesture-based music controller
-    </h2>
-
-    <p>
-      A real-time performance system that uses hand tracking,
-      gesture recognition, and audio processing to control
-      musical effects through movement.
-    </p>
-
-    <p class="imogen-note">
-      Inspired by the Mi.Mu Gloves pioneered by
-      :contentReference[oaicite:0]{index=0}.
-      The project later received mentorship and feedback from members
-      of the Mi.Mu/Glover team.
-    </p>
-
-    <a href="projects.html#gesture-controller">
-      view project →
-    </a>
-
-  </div>
-
-</section>
-
- <!-- DJ Section-->
-  <section class="dj-container">
-<div class="dj-hero-image">
-  <h2 class="dj-title">song mashups</h2>
-  
-  <div class="record-container sideways">
-    <div class="turntable-base"></div>
-    <div class="record" id="record"></div>
-    <div class="tonearm"></div>
-  </div>
-  <div class="dj-control-panel">
-<div class="track-list" id="track-list"> 
+        <div class="dj-control-panel">
+            <div class="track-list" id="track-list"> 
     <div class="track-square" data-track="DJ Mixes/4RawsxFOMDJ.mp3">
       <div class="cover"></div>
       <div class="info">
@@ -670,186 +1001,232 @@ tracks.forEach(track => {
       </div>
     </div>
   </div>
-</div>
+        </div>
 
-</div>  
+    </div>
 
-</div>
-
-<audio id="dj-audio" preload="metadata"></audio>
- 
 </section>
 
-
-
-</body>
-
-
-
-<body>
-
-<!-- LIGHTBOX -->
-<div id="lightbox">
-  <span id="lightbox-close">&times;</span>
-  <img id="lightbox-img" src="" />
-  <figcaption id="lightbox-caption"></figcaption>
-</div>
-
-
-
 <script>
-const gallery = document.getElementById("gallery");
-const slides = document.querySelectorAll(".slide");
+const recordTarget = document.getElementById("record-target");
+const audio = document.getElementById("dj-audio");
 
-function updateActive() {
-  const center = gallery.scrollLeft + gallery.offsetWidth / 2;
+let currentRecord = null;
+let currentTrack = null;
 
-  slides.forEach(slide => {
-    const slideCenter =
-      slide.offsetLeft + slide.offsetWidth / 2;
 
-    const dist = Math.abs(center - slideCenter);
 
-    if (dist < slide.offsetWidth / 2) {
-      slide.classList.add("active");
-    } else {
-      slide.classList.remove("active");
-    }
-  });
-}
-
-gallery.addEventListener("scroll", updateActive);
-updateActive();
-</script>
-<script>
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const lightboxCaption = document.getElementById("lightbox-caption");
-const lightboxClose = document.getElementById("lightbox-close");
-
-slides.forEach(slide => {
-  slide.addEventListener("click", () => {
-    const img = slide.querySelector("img");
-    const caption = slide.querySelector("figcaption").innerText;
-
-    lightboxImg.src = img.src;
-    lightboxCaption.innerText = caption;
-
-    lightbox.style.display = "flex";
-  });
-});
-
-lightboxClose.addEventListener("click", () => {
-  lightbox.style.display = "none";
-});
-
-// close lightbox when clicking outside the image
-lightbox.addEventListener("click", e => {
-  if (e.target === lightbox) {
-    lightbox.style.display = "none";
-  }
-});
-</script>
-
-<script>
-const record = document.getElementById("record");
-const djAudio = document.getElementById("dj-audio");
-
-let currentDockedTrack = null;
+/*
+    DJ BUTTON -> RECORD
+*/
 
 document.querySelectorAll(".track-square").forEach(track => {
-  track.addEventListener("click", function() {
-    // 1. Remove old track from record if it exists
-    if (currentDockedTrack) currentDockedTrack.remove();
-    
-    // 2. Get coordinates BEFORE we do anything
-    const trackRect = this.getBoundingClientRect();
-    const recordRect = record.getBoundingClientRect();
 
-    // 3. Create the 'Flying' Clone
-    const clone = this.cloneNode(true);
-    clone.style.width = trackRect.width + 'px';
-    clone.style.height = trackRect.height + 'px';
-    clone.style.top = trackRect.top + 'px';
-    clone.style.left = trackRect.left + 'px';
-    clone.classList.add('flying');
-    
-    document.body.appendChild(clone);
 
-    // 4. Calculate the 'Target' (center of record)
-    const targetX = recordRect.left + (recordRect.width / 2) - (trackRect.width / 2);
-    const targetY = recordRect.top + (recordRect.height / 2) - (trackRect.height / 2);
+    track.addEventListener("click", () => {
 
-    // 5. Start Flight (Small delay to let browser register the clone)
-    requestAnimationFrame(() => {
-      clone.style.left = targetX + 'px';
-      clone.style.top = targetY + 'px';
-      clone.style.transform = "rotate(360deg) scale(1.1)"; // Spins while flying
+
+        const sourceRect = track.getBoundingClientRect();
+        const targetRect = recordTarget.getBoundingClientRect();
+
+
+
+        /*
+            remove previous record
+        */
+
+        if(currentRecord){
+
+            currentRecord.remove();
+
+            currentRecord = null;
+
+        }
+
+
+
+
+        /*
+            create flying clone
+        */
+
+        const record = track.cloneNode(true);
+
+        record.style.position="fixed";
+
+        record.style.width =
+        sourceRect.width+"px";
+
+        record.style.height =
+        sourceRect.height+"px";
+
+
+        record.style.left =
+        sourceRect.left+"px";
+
+        record.style.top =
+        sourceRect.top+"px";
+
+
+
+        document.body.appendChild(record);
+
+
+
+
+        /*
+            calculate destination
+        */
+
+
+        const destinationX =
+        targetRect.left +
+        targetRect.width/2 -
+        sourceRect.width/2;
+
+
+        const destinationY =
+        targetRect.top +
+        targetRect.height/2 -
+        sourceRect.height/2;
+
+
+
+
+
+        /*
+            animate flight
+        */
+
+
+        requestAnimationFrame(()=>{
+
+
+            record.style.transition =
+            `
+            all .7s
+            cubic-bezier(.34,1.56,.64,1)
+            `;
+
+
+            record.style.left =
+            destinationX+"px";
+
+
+            record.style.top =
+            destinationY+"px";
+
+
+            record.style.transform =
+            `
+            rotate(720deg)
+            scale(1.15)
+            `;
+
+
+
+        });
+
+
+
+
+
+        /*
+            dock into record
+        */
+
+
+        setTimeout(()=>{
+
+
+            record.remove();
+
+
+            const vinyl =
+            document.createElement("div");
+
+
+            vinyl.className =
+            "track-square docked";
+
+
+            recordTarget.appendChild(vinyl);
+
+
+            currentRecord = vinyl;
+
+
+
+
+            /*
+                play audio
+            */
+
+
+            const src =
+            track.dataset.track;
+
+
+            audio.src = src;
+
+            audio.play();
+
+
+
+            currentTrack = track;
+
+
+
+        },700);
+
+
+
+
     });
 
-    // 6. Docking (Wait for animation to finish)
-    setTimeout(() => {
-      clone.classList.remove('flying');
-      clone.classList.add('docked');
-      
-      // Reset position so it centers inside the record parent
-      clone.style.left = "50%";
-      clone.style.top = "50%";
-      clone.style.transform = "translate(-50%, -50%)";
-      
-      record.appendChild(clone); // Physically move it inside the spinning record
-      currentDockedTrack = clone;
 
-      // 2. MOVE THE TONEARM
-  const tonearm = document.querySelector('.tonearm');
-  tonearm.classList.add('playing');
-      // Play Audio & Spin
-      djAudio.src = this.getAttribute("data-track");
-      djAudio.play();
-      record.classList.add("spinning");
-    }, 600);
-  });
 });
 
-djAudio.onended = () => {
-    record.classList.remove("spinning");
-    const tonearm = document.querySelector('.tonearm');
-  tonearm.classList.remove('playing');
-    if (currentDockedTrack) currentDockedTrack.remove();
-};
-</script>
+document.querySelectorAll(".track").forEach(track => {
 
-<script>
-const belt = document.getElementById("belt");
-let beltPosition = 0;
-const resetPoint = 62.5; 
+    track.addEventListener("click", () => {
 
-setInterval(() => {
-    beltPosition += 0.08;
-    if (beltPosition >= resetPoint) {
-        beltPosition = 0;
+        if(currentRecord){
+            currentRecord.remove();
+            currentRecord = null;
+        }
+
+        audio.src = track.dataset.track;
+        audio.play();
+
+    });
+
+});
+
+
+
+
+/*
+    cleanup when song ends
+*/
+
+
+audio.addEventListener(
+"ended",
+()=>{
+
+
+    if(currentRecord){
+
+        currentRecord.remove();
+
+        currentRecord=null;
+
     }
-    belt.style.transform = `translateX(-${beltPosition}vw)`;
-}, 20);
-</script>
 
-<script>
-const header = document.querySelector('.image-header');
-const reveal = document.getElementById('header-reveal');
 
-header.addEventListener('mousemove', e => {
-  const rect = header.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100;
-  const y = ((e.clientY - rect.top) / rect.height) * 100;
-  
-  reveal.style.setProperty('--x', x + '%');
-  reveal.style.setProperty('--y', y + '%');
 });
 </script>
-
-
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 </body>
 </html>
