@@ -311,25 +311,17 @@ font-size:13px;
 .grid{
 
 display:grid;
-
 grid-template-columns:repeat(2,1fr);
-
 gap:25px;
-
 margin-bottom:100px;
-
 }
 
 
 
 .card{
-
 position:relative;
-
 padding:30px;
-
 min-height:260px;
-
 border-radius:20px;
 
 
@@ -346,14 +338,8 @@ rgba(255,255,255,.03);
 
 
 border:1px solid rgba(255,255,255,.1);
-
-
 backdrop-filter:blur(20px);
-
-
 transition:.35s ease;
-
-
 overflow:hidden;
 
 }
@@ -361,11 +347,8 @@ overflow:hidden;
 
 
 .card:hover{
-
 transform:translateY(-8px);
-
 border-color:rgba(101,255,143,.5);
-
 }
 
 
@@ -374,15 +357,10 @@ border-color:rgba(101,255,143,.5);
 
 
 .meta{
-
 color:#65ff8f;
-
 font-size:12px;
-
 margin-bottom:25px;
-
     animation: pulse 3s ease-in-out infinite;
-
 }
 
 @keyframes pulse {
@@ -398,43 +376,30 @@ margin-bottom:25px;
 }
 
 .title{
-
 font-size:24px;
-
 margin-bottom:8px;
-
 }
 
 
 
 .subtitle{
-
 color:#999;
-
 margin-bottom:15px;
-
 }
 
 
 
 .date{
-
 color:#555;
-
 font-size:12px;
-
 }
 
 
 
 .description{
-
 margin-top:25px;
-
 color:#aaa;
-
 line-height:1.7;
-
 }
 
 
@@ -443,31 +408,20 @@ line-height:1.7;
 
 
 .tags{
-
 display:flex;
-
 gap:8px;
-
 flex-wrap:wrap;
-
 margin-top:25px;
-
 }
 
 
 
 .tag{
-
 padding:5px 10px;
-
 border-radius:20px;
-
 border:1px solid rgba(255,255,255,.15);
-
 color:#888;
-
 font-size:12px;
-
 }
 
 
@@ -476,22 +430,15 @@ font-size:12px;
 
 
 .artifact{
-
 min-height:330px;
-
 }
 
 
 
 .preview{
-
 height:120px;
-
 border-radius:12px;
-
 margin-bottom:25px;
-
-
 background:
 
 linear-gradient(
@@ -514,6 +461,17 @@ font-size:12px;
 
 }
 
+.project-link {
+  padding: 6px 10px;
+  color:#15e815;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 
 .bg-video {
     position: fixed;
@@ -572,11 +530,11 @@ grid-template-columns:1fr;
 
 
     <div class="nav-item">
-      <a href="experiences.html">work/</a>
+      <a href="construction.html">work/</a>
 
       <div class="dropdown">
-        <a href="experiences.html#experiences">experiences.py</a>
-        <a href="experiences.html#projects">projects.py</a>
+        <a href="construction.html">experiences.py</a>
+        <a href="construction.html#projects">projects.py</a>
       </div>
     </div>
 
@@ -632,7 +590,7 @@ work/
 </section>
 
 <div class="section-title" id="experiences">
-> ACTIVE SYSTEMS
+> EXPERIENCES
 </div>
 
 <section class="grid">
@@ -797,7 +755,7 @@ Selected as 1 of 30 from 250+ applicants to UMD’s top startup incubator.
 
 
 <div class="title">
-gesture-midi-controller
+gesture-music-lab
 </div>
 
 <p class="description">
@@ -805,6 +763,7 @@ Turning computer vision into
 real-time musical expression.
 </p>
 
+<a class="project-link" href="https://github.com/tanvigup7/autonomous-drone-sim" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
 
 <div class="tags">
 
@@ -826,7 +785,7 @@ real-time musical expression.
 
 
 <div class="title">
-spine segmentation
+spatial surgery
 </div>
 
 
@@ -837,6 +796,7 @@ for medical imagery.
 
 </p>
 
+  <a class="project-link" href="https://github.com/tanvigup7/autonomous-drone-sim" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
 
 <div class="tags">
 
@@ -868,11 +828,13 @@ nfl predictive model
 Playoffs prediction model.
 </p>
 
+<a class="project-link" href="https://github.com/tanvigup7/autonomous-drone-sim" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
 
 <div class="tags">
 
 <div class="tag">Beautiful Soup</div>
 <div class="tag">Pandas</div>
+
 
 </div>
 
@@ -892,7 +854,7 @@ Playoffs prediction model.
 
 
 <div class="title">
-virtual drum sequencer
+lunaris
 </div>
 
 
@@ -903,12 +865,13 @@ with synchronized playback.
 
 </p>
 
+<a class="project-link" href="https://github.com/tanvigup7/autonomous-drone-sim" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
 
 <div class="tags">
 
 <div class="tag">Python</div>
 <div class="tag">Audio</div>
-
+        
 </div>
 
 
@@ -931,7 +894,7 @@ with synchronized playback.
 
 
 <script>
-const text = "> an archive of experiences and experiments";
+const text = "> an archive of systems, experiments, and things I built";
 
 const subtitle = document.getElementById("experience-subtitle");
 
